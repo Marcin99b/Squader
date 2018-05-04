@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -15,23 +14,24 @@ namespace Squader.Web.Controllers
             return View();
         }
 
-        public IActionResult About()
+        [Route("initialMessages")]
+        public JsonResult InitialMessages()
         {
-            ViewData["Message"] = "Your application description page.";
+            var initialMessages = FakeMessageStore.FakeMessages.OrderByDescending(m => m.Date).Take(2);
 
-            return View();
+            var initialValues = new ClientState()
+            {
+                Messages = initialMessages,
+                LastFetchedMessageDate = initialMessages.Last().Date
+            };
+
+            return Json(initialValues);
         }
 
-        public IActionResult Contact()
+        [Route("fetchMessages")]
+        public JsonResult FetchMessages(DateTime lastFetchedMessageDate)
         {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return Json(FakeMessageStore.FakeMessages.OrderByDescending(m => m.Date).SkipWhile(m => m.Date >= lastFetchedMessageDate).Take(1));
         }
     }
 }
