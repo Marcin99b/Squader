@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace VueDotnetSSR.Models
+namespace Squader.Web.Models
 {
     public class FakeMessageStore
     {

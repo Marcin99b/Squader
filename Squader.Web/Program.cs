@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 
-namespace VueDotnetSSR
+namespace Squader.Web
 {
     public class Program
     {
