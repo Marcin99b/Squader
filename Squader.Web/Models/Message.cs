@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace Squader.Web.Models
+namespace VueDotnetSSR.Models
 {
     public class Message
     {

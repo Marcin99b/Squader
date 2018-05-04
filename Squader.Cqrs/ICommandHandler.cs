@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Squader.Web.Cqrs
+namespace Squader.Cqrs
 {
     public interface ICommandHandler<T> where T : ICommand
     {

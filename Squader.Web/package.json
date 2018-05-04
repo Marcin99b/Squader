@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "name": "Squader.Web",
+  "name": "VueDotnetSSR",
   "private": true,
   "dependencies": {
     "aspnet-prerendering": "^1.0.4",

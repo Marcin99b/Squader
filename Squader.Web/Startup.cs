@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 
-namespace Squader.Web
+namespace VueDotnetSSR
 {
     public class Startup
     {

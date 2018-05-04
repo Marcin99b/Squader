@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Squader.Web.Models;
+using VueDotnetSSR.Models;
 
-namespace Squader.Web.Controllers
+namespace VueDotnetSSR.Controllers
 {
     public class HomeController : Controller
     {
