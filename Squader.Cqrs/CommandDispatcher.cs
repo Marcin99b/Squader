@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 
-namespace Squader.Cqrs
+namespace Squader.Web.Cqrs
 {
     public class CommandDispatcher
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace VueDotnetSSR.Models
+namespace Squader.Web.Models
 {
     public class ClientState
     {

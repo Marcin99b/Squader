@@ -1,4 +1,4 @@
-﻿namespace Squader.Cqrs
+﻿namespace Squader.Web.Cqrs
 {
     public interface ICommand
     {
