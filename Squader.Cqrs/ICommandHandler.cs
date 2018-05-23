@@ -2,7 +2,11 @@
 
 namespace Squader.Cqrs
 {
-    public interface ICommandHandler<T> where T : ICommand
+    public interface ICommandHandler
+    {
+    }
+
+    public interface ICommandHandler<T> : ICommandHandler where T : ICommand
     {
         Task HandleAsync(T command);
     }

@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Squader.ReadModel", "Squade
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Squader.Cqrs", "Squader.Cqrs\Squader.Cqrs.csproj", "{7AC6C7BE-AC2D-4362-842B-A91B92F8DEEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Squader.Api", "Squader.Api\Squader.Api.csproj", "{17A5FE53-569C-4398-AF01-C1A501D2AD63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Squader.Api", "Squader.Api\Squader.Api.csproj", "{17A5FE53-569C-4398-AF01-C1A501D2AD63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Squader.IoC", "Squader.IoC\Squader.IoC.csproj", "{7BADDC63-6328-42D0-91DB-D4E40FAA01E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{17A5FE53-569C-4398-AF01-C1A501D2AD63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17A5FE53-569C-4398-AF01-C1A501D2AD63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17A5FE53-569C-4398-AF01-C1A501D2AD63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BADDC63-6328-42D0-91DB-D4E40FAA01E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BADDC63-6328-42D0-91DB-D4E40FAA01E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BADDC63-6328-42D0-91DB-D4E40FAA01E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BADDC63-6328-42D0-91DB-D4E40FAA01E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

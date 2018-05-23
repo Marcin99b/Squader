@@ -6,11 +6,11 @@ namespace Squader.Cqrs
 {
     public class MessageBus : IMessageBus
     {
-        private readonly IComponentContext _context;
+        private readonly Func<Type, ICommandHandler> _handlersFactory;
 
-        public MessageBus(IComponentContext context)
+        public MessageBus(Func<Type, ICommandHandler> handlersFactory)
         {
-            _context = context;
+            _handlersFactory = handlersFactory;
         }
 
         public async Task ExecuteAsync<T>(T command) where T : ICommand
@@ -20,8 +20,8 @@ namespace Squader.Cqrs
                 throw new ArgumentNullException(nameof(command),
                     $"Command: '{typeof(T).Name}' can not be null.");
             }
-            
-            var handler = _context.Resolve<ICommandHandler<T>>();
+            var handler = (ICommandHandler<T>)_handlersFactory(typeof(T));
+
             await handler.HandleAsync(command);
         }
     }

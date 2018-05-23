@@ -1,8 +1,8 @@
 ﻿using Autofac;
 using Microsoft.Extensions.Configuration;
-using Squader.Infrastructure.IoC.Modules;
+using Squader.IoC.Modules;
 
-namespace Squader.Infrastructure.IoC
+namespace Squader.IoC
 {
     public class ContainerModule : Autofac.Module
     {
