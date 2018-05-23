@@ -4,4 +4,12 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Users\Commands\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Squader.Cqrs\Squader.Cqrs.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Users\Controllers\" />
+    <Folder Include="Areas\Users\ViewModels\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Squader.Cqrs\Squader.Cqrs.csproj" />
+    <ProjectReference Include="..\Squader.DomainModel\Squader.DomainModel.csproj" />
+    <ProjectReference Include="..\Squader.Infrastructure\Squader.Infrastructure.csproj" />
+    <ProjectReference Include="..\Squader.ReadModel\Squader.ReadModel.csproj" />
+  </ItemGroup>
+
+</Project>
