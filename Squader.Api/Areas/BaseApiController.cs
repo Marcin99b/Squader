@@ -12,10 +12,12 @@ namespace Squader.Api.Areas
     public class BaseApiController : Controller
     {
         protected IMessageBus messageBus;
+        protected IQueryBus queryBus;
 
-        protected BaseApiController(IMessageBus messageBus)
+        protected BaseApiController(IMessageBus messageBus, IQueryBus queryBus)
         {
             this.messageBus = messageBus;
+            this.queryBus = queryBus;
         }
     }
 }

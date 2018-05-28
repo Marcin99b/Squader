@@ -8,7 +8,7 @@ namespace Squader.Api.Areas.Advertisements.Controllers
 {
     public class AdvertisementsController : BaseApiController
     {
-        public AdvertisementsController(IMessageBus messageBus) : base(messageBus)
+        public AdvertisementsController(IMessageBus messageBus, IQueryBus queryBus) : base(messageBus, queryBus)
         {
         }
         
