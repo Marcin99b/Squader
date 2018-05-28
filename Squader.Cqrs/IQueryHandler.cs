@@ -6,8 +6,11 @@ namespace Squader.Cqrs
     {
 
     }
-    public interface IQueryHandler<T> : IQueryHandler where T :IQuery
+    public interface IQueryHandler<T, W> : IQueryHandler 
+    where T :IQuery
+    where W :IQueryResult
+
     {
-          Task HandleAsync(T query);
+          Task<W> HandleAsync(T query);
     }
 }
