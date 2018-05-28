@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Squader.Cqrs\Squader.Cqrs.csproj" />
+    <ProjectReference Include="..\Squader.Infrastructure\Squader.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

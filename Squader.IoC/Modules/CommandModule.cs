@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using Autofac;
@@ -12,34 +14,44 @@ namespace Squader.IoC.Modules
     { 
         protected override void Load(ContainerBuilder builder)
         {
-            base.Load(builder);
+            var list = new List<string>();
+            var stack = new Stack<Assembly>();
 
-            var handlers = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes())
-                .Where(b => typeof(ICommandHandler).IsAssignableFrom(b) && !b.IsInterface && !b.IsAbstract)
-                .ToList();
-
-            foreach (var handler in handlers)
+            stack.Push(Assembly.GetEntryAssembly());
+            do
             {
-                builder.RegisterType(handler)
-                    .As(handler.GetInterfaces().First())
-                    .InstancePerLifetimeScope();
-            }
-            
-            builder.Register<Func<Type, ICommandHandler>>(c =>
-            {
-                var ctx = c.Resolve<IComponentContext>();
+                var asm = stack.Pop();
 
-                return t =>
+                if (asm.FullName.Contains("Squader.DomainModel"))
                 {
-                    var handlerType = typeof(ICommandHandler<>).MakeGenericType(t);
-                    return (ICommandHandler)ctx.Resolve(handlerType);
-                };
-            });
+                    var handlers = asm.GetTypes()
+                        .Where(type => typeof(ICommandHandler).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract)
+                        .ToList();
 
-            builder.RegisterType<MessageBus>()
-                .AsImplementedInterfaces()
+                    foreach (var handler in handlers)
+                    {
+                        builder.RegisterType(handler)
+                            .As(handler.GetInterfaces().First())
+                            .InstancePerLifetimeScope();
+                    }
+                }
+
+                foreach (var reference in asm.GetReferencedAssemblies())
+                    if (!list.Contains(reference.FullName))
+                    {
+                        stack.Push(Assembly.Load(reference));
+                        list.Add(reference.FullName);
+                    }
+
+            }
+            while (stack.Count > 0);
+             
+
+            builder.RegisterType<CommandBus>()
+                .As<ICommandBus>()
                 .InstancePerLifetimeScope();
             
         }
+        
     }
 }

@@ -14,8 +14,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Squader.Cqrs\Squader.Cqrs.csproj" />
     <ProjectReference Include="..\Squader.DomainModel\Squader.DomainModel.csproj" />
-    <ProjectReference Include="..\Squader.Infrastructure\Squader.Infrastructure.csproj" />
-    <ProjectReference Include="..\Squader.ReadModel\Squader.ReadModel.csproj" />
   </ItemGroup>
 
 </Project>

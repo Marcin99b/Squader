@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
@@ -17,6 +19,14 @@ namespace Squader.Api
 
         public Startup(IHostingEnvironment env)
         {
+            var assembly = AppDomain.CurrentDomain.GetAssemblies();
+
+            foreach (Assembly an in assembly)
+            {
+                //if (an.FullName.Contains("Squader"))
+                    //Debug.WriteLine(an.FullName);
+            }
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)

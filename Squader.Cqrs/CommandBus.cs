@@ -4,13 +4,13 @@ using Autofac;
 
 namespace Squader.Cqrs
 {
-    public class MessageBus : IMessageBus
+    public class CommandBus : ICommandBus
     {
-        private readonly Func<Type, ICommandHandler> _handlersFactory;
+        private IComponentContext _context;
 
-        public MessageBus(Func<Type, ICommandHandler> handlersFactory)
+        public CommandBus(IComponentContext context)
         {
-            _handlersFactory = handlersFactory;
+            _context = context;
         }
 
         public async Task ExecuteAsync<T>(T command) where T : ICommand
@@ -20,7 +20,7 @@ namespace Squader.Cqrs
                 throw new ArgumentNullException(nameof(command),
                     $"Command: '{typeof(T).Name}' can not be null.");
             }
-            var handler = (ICommandHandler<T>)_handlersFactory(typeof(T));
+            var handler = _context.Resolve<ICommandHandler<T>>();
 
             await handler.HandleAsync(command);
         }

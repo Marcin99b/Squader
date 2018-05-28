@@ -8,7 +8,7 @@ namespace Squader.Api.Areas.Advertisements.Controllers
 {
     public class AdvertisementsController : BaseApiController
     {
-        public AdvertisementsController(IMessageBus messageBus, IQueryBus queryBus) : base(messageBus, queryBus)
+        public AdvertisementsController(ICommandBus commandBus, IQueryBus queryBus) : base(commandBus, queryBus)
         {
         }
         
@@ -16,7 +16,7 @@ namespace Squader.Api.Areas.Advertisements.Controllers
         public async Task<IActionResult> CreateNewAdvertisementAsync()
         {
             var command = new CreateNewAdvertisementCommand("test", "test");
-            await this.messageBus.ExecuteAsync(command);
+            await this.commandBus.ExecuteAsync(command);
             return Ok();
         }
     }

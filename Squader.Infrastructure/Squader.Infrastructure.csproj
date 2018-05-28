@@ -10,10 +10,4 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.0.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Squader.Cqrs\Squader.Cqrs.csproj" />
-    <ProjectReference Include="..\Squader.DomainModel\Squader.DomainModel.csproj" />
-    <ProjectReference Include="..\Squader.ReadModel\Squader.ReadModel.csproj" />
-  </ItemGroup>
-
 </Project>
