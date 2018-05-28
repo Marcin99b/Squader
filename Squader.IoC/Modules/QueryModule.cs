@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Reflection;
 using Autofac;
@@ -8,14 +8,14 @@ using Squader.DomainModel.Advertisements.Commands.Handlers;
 
 namespace Squader.IoC.Modules
 {
-    public class CommandModule : Autofac.Module
-    { 
+    public class QueryModule :Autofac.Module
+    {
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
 
             var handlers = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes())
-                .Where(b => typeof(ICommandHandler).IsAssignableFrom(b) && !b.IsInterface && !b.IsAbstract)
+                .Where(b => typeof(IQueryHandler).IsAssignableFrom(b) && !b.IsInterface && !b.IsAbstract)
                 .ToList();
 
             foreach (var handler in handlers)
@@ -25,21 +25,23 @@ namespace Squader.IoC.Modules
                     .InstancePerLifetimeScope();
             }
             
-            builder.Register<Func<Type, ICommandHandler>>(c =>
+            builder.Register<Func<Type, IQueryHandler>>(c =>
             {
                 var ctx = c.Resolve<IComponentContext>();
 
                 return t =>
                 {
-                    var handlerType = typeof(ICommandHandler<>).MakeGenericType(t);
-                    return (ICommandHandler)ctx.Resolve(handlerType);
+                    var handlerType = typeof(IQueryHandler<,>).MakeGenericType(t);
+                    return (IQueryHandler)ctx.Resolve(handlerType);
                 };
             });
 
-            builder.RegisterType<MessageBus>()
+            builder.RegisterType<QueryBus>()
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
             
         }
     }
+        
+    
 }

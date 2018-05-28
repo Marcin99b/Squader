@@ -16,6 +16,7 @@ namespace Squader.IoC
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterModule<CommandModule>();
+            builder.RegisterModule<QueryModule>();
         }
     }
 }
