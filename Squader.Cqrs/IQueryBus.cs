@@ -4,6 +4,8 @@ namespace Squader.Cqrs
 {
     public interface IQueryBus
     {
-        Task ExecuteAsync<T>(T query) where T :IQuery;
+        Task<W> ExecuteAsync<T,W>(T Query) 
+            where W :IQueryResult
+            where T :IQuery;
     }
 }
