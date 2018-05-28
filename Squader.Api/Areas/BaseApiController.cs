@@ -11,12 +11,12 @@ namespace Squader.Api.Areas
     [EnableCors("AllowAny")]
     public class BaseApiController : Controller
     {
-        protected IMessageBus messageBus;
+        protected ICommandBus commandBus;
         protected IQueryBus queryBus;
 
-        protected BaseApiController(IMessageBus messageBus, IQueryBus queryBus)
+        protected BaseApiController(ICommandBus commandBus, IQueryBus queryBus)
         {
-            this.messageBus = messageBus;
+            this.commandBus = commandBus;
             this.queryBus = queryBus;
         }
     }

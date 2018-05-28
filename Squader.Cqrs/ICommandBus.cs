@@ -2,7 +2,7 @@
 
 namespace Squader.Cqrs
 {
-    public interface IMessageBus
+    public interface ICommandBus
     {
         Task ExecuteAsync<T>(T command) where T : ICommand;
     }
