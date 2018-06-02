@@ -22,7 +22,7 @@ namespace Squader.Cqrs
             }
             var handler = _context.Resolve<ICommandHandler<T>>();
 
-            await handler.HandleAsync(command);
+            await handler.HandleAsync(command); 
         }
     }
 }

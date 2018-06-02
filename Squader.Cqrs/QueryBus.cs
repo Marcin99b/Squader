@@ -6,10 +6,10 @@ namespace Squader.Cqrs
 {
     public class QueryBus : IQueryBus
     {
-        private readonly Func<Type, IQueryHandler> _handlersFactory;
-        public QueryBus(Func<Type, IQueryHandler> handlersFactory)
+        private IComponentContext _context;
+        public QueryBus(IComponentContext context)
         {
-            _handlersFactory = handlersFactory;
+            _context = context;
         }
         
         public async Task<W> ExecuteAsync<T, W>(T query)
@@ -21,7 +21,7 @@ namespace Squader.Cqrs
                 throw new ArgumentNullException(nameof(query),
                     $"Query: '{typeof(T).Name}' can not be null.");
             }
-            var handler = (IQueryHandler<T,W>)_handlersFactory(typeof(T));
+            var handler = _context.Resolve<IQueryHandler<T,W>>();
 
             return await handler.HandleAsync(query);
         }
