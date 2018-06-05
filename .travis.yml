@@ -1,0 +1,13 @@
+language: csharp
+dist: trusty
+sudo: required
+mono: none
+dotnet: 2.0.0
+before_script:
+  - chmod -R a+x scripts
+script:
+  - ./scripts/travis-build.sh
+notifications:
+  email:
+    on_success: never
+    on_failure: always
