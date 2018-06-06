@@ -12,7 +12,7 @@ namespace Squader.Common
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .MinimumLevel.Debug()
-                .WriteTo.RollingFile("Logs/log-{Date}.txt")
+                .WriteTo.RollingFile("Logs/log-{Date}.txt", retainedFileCountLimit: 90)
                 .CreateLogger();
         }
     }
