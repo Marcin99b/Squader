@@ -9,10 +9,10 @@ namespace Squader.Api.Areas.Advertisements.Controllers
 {
     public class AdvertisementsController : BaseApiController
     {
-        private readonly ILogger<AdvertisementsController> _logger;
-        public AdvertisementsController(ICommandBus commandBus, IQueryBus queryBus, ILogger<AdvertisementsController> logger) : base(commandBus, queryBus)
+        
+        public AdvertisementsController(ICommandBus commandBus, IQueryBus queryBus, ILogger<AdvertisementsController> logger) : base(commandBus, queryBus, logger)
         {
-            _logger = logger;
+            
         }
         
         [HttpGet("create")] //should http post, but get is easier for manual tests
