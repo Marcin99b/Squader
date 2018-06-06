@@ -20,6 +20,7 @@ namespace Squader.Api.Areas.Advertisements.Controllers
         {
             var command = new CreateNewAdvertisementCommand("test", "test");
             await this.commandBus.ExecuteAsync(command);
+            logger.LogInformation("Logger works !");
             return Ok();
         }
     }
