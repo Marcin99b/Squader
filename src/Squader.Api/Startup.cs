@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Squader.IoC;
+using Squader.Common;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace Squader.Api
 {
@@ -58,8 +61,11 @@ namespace Squader.Api
             return new AutofacServiceProvider(ApplicationContainer);
         }
         
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddSerilog();
+            ConfigureSerilog.Configure();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
