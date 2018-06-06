@@ -13,6 +13,7 @@ namespace Squader.Api.Areas
     {
         protected ICommandBus commandBus;
         protected IQueryBus queryBus;
+        
 
         protected BaseApiController(ICommandBus commandBus, IQueryBus queryBus)
         {
