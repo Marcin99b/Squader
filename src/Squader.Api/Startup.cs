@@ -14,6 +14,8 @@ using Serilog;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
+using Squader.Common.Settings;
+using Squader.Common.Extensions;
 
 namespace Squader.Api
 {
@@ -55,17 +57,16 @@ namespace Squader.Api
                     });
             });
             services.AddMvc();
-
-            var key = Configuration.GetSection("Jwt:Key").Value;
-            var issuer = Configuration.GetSection("Jwt:Issuer").Value;
+            var jwtSettings = Configuration.GetSettings<JwtSettings>();
+            
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidIssuer = issuer,
+                        ValidIssuer = jwtSettings.Issuer,
                         ValidateAudience = false,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key)),
                         SaveSigninToken = true
                     };
                 });

@@ -5,17 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Squader.Api.Areas.Authentication.Dtos;
 using Squader.Common;
+using Squader.Common.Extensions;
+using Squader.Common.Settings;
 
 namespace Squader.Api.Areas.Authentication.Helpers
 {
     public class JwtHandler 
     {
-        private readonly IConfiguration _configuration;
+        private readonly JwtSettings _jwtSettings;
+        
 
         public JwtHandler(IConfiguration configuration)
         {
-            _configuration = configuration;
+            _jwtSettings = configuration.GetSettings<JwtSettings>(); 
+
         }
 
 
@@ -47,7 +52,7 @@ namespace Squader.Api.Areas.Authentication.Helpers
             };
         }
 
-        public async Task<JwtDto> CreateTokenByUserObject(UserDto user)
+      /*  public async Task<JwtDto> CreateTokenByUserObject(UserDto user)
             => await CreateTokenAsync(user.Id, user.Role);
 
         public async Task<JwtDto> RefreshTokenAsync(ClaimsPrincipal userToken)
@@ -61,7 +66,7 @@ namespace Squader.Api.Areas.Authentication.Helpers
             }
             return await CreateTokenAsync(userId, role);
         }
-
+        */
        
     }
 }
