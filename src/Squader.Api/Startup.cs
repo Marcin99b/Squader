@@ -11,6 +11,9 @@ using Squader.IoC;
 using Squader.Common;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
 
 namespace Squader.Api
 {
@@ -52,6 +55,21 @@ namespace Squader.Api
                     });
             });
             services.AddMvc();
+
+            var key = Configuration.GetSection("Jwt:Key").Value;
+            var issuer = Configuration.GetSection("Jwt:Issuer").Value;
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidIssuer = issuer,
+                        ValidateAudience = false,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
+                        SaveSigninToken = true
+                    };
+                });
+            services.AddAuthorization(x => x.AddPolicy("admin", policy => policy.RequireRole("admin")));
 
             var builder = new ContainerBuilder();
             builder.Populate(services);
