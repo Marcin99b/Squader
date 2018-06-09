@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Squader.Api.Areas.Authentication.Dtos;
 using Squader.Cqrs;
 
 namespace Squader.Api.Areas.Authentication.Controllers
@@ -15,11 +16,13 @@ namespace Squader.Api.Areas.Authentication.Controllers
 
         }
         
-
-        
-        public IActionResult Index()
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginAsync(UserForLoginDto user)
         {
-            return View();
+
+            return Ok();
         }
+
+       
     }
 }
