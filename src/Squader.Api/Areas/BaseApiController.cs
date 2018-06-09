@@ -2,6 +2,7 @@
 using Autofac.Core.Registration;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Squader.Cqrs;
 
 namespace Squader.Api.Areas
@@ -13,11 +14,13 @@ namespace Squader.Api.Areas
     {
         protected ICommandBus commandBus;
         protected IQueryBus queryBus;
+        protected ILogger<BaseApiController> logger;
 
-        protected BaseApiController(ICommandBus commandBus, IQueryBus queryBus)
+        protected BaseApiController(ICommandBus commandBus, IQueryBus queryBus, ILogger<BaseApiController> logger)
         {
             this.commandBus = commandBus;
             this.queryBus = queryBus;
+            this.logger = logger;
         }
     }
 }
