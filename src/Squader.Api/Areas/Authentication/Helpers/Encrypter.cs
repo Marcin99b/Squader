@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace Hated.Infrastructure.Services
+namespace Squader.Api.Areas.Authentication.Helpers
 {
     public class Encrypter
     {
