@@ -11,5 +11,8 @@ namespace Squader.DomainModel.Users
         public string Email { get; set; }
         public string Password { get; protected set; }
         public string Salt { get; protected set; }
+        public string Role { get; protected set; }
+        public DateTime ChangedAt { get; protected set; }
+        public DateTime CreatedAt { get; protected set; }
     }
 }
