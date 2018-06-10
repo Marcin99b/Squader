@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Squader.Api.Areas.Authentication.Dtos;
+using Squader.Common.Extensions;
 using Squader.Cqrs;
 
 namespace Squader.Api.Areas.Authentication.Controllers
@@ -19,6 +20,18 @@ namespace Squader.Api.Areas.Authentication.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync(UserForLoginDto user)
         {
+            if(user.Username.IsEmail())
+            //call EmailCommand
+            { }
+            else
+            // call usernameCommand
+            { }
+             
+
+            
+
+
+
 
             return Ok();
         }

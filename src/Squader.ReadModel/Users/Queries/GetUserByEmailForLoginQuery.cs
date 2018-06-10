@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Squader.ReadModel.Users.Queries
 {
-    class GetUserByEmailQuery :IQuery
+    public class GetUserByEmailForLoginQuery : IQuery
     {
-
+        public string Email { get; set; }
     }
 }

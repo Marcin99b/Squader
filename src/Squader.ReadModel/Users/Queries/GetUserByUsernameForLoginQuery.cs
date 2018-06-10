@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Squader.Cqrs;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Squader.ReadModel.Users.Queries
 {
-    class GetUserByUsernameQuery
+    public class GetUserByUsernameForLoginQuery :IQuery
     {
+
     }
 }
