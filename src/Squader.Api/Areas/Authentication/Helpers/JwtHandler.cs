@@ -52,7 +52,7 @@ namespace Squader.Api.Areas.Authentication.Helpers
             };
         }
 
-      /*  public async Task<JwtDto> CreateTokenByUserObject(UserDto user)
+        public async Task<JwtDto> CreateTokenByUserObject(UserForJwtDto user)
             => await CreateTokenAsync(user.Id, user.Role);
 
         public async Task<JwtDto> RefreshTokenAsync(ClaimsPrincipal userToken)
@@ -66,7 +66,7 @@ namespace Squader.Api.Areas.Authentication.Helpers
             }
             return await CreateTokenAsync(userId, role);
         }
-        */
+        
        
     }
 }
