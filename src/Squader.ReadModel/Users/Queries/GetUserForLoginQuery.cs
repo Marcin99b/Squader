@@ -7,6 +7,11 @@ namespace Squader.ReadModel.Users.Queries
 {
     public class GetUserForLoginQuery : IQuery
     {
-        public string Email { get; set; }
+        public string UserIdentifier { get; set; }
+
+        public GetUserForLoginQuery(string identifier)
+        {
+            UserIdentifier = identifier;
+        }
     }
 }

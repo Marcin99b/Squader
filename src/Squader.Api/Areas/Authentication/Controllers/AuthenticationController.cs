@@ -7,6 +7,8 @@ using Microsoft.Extensions.Logging;
 using Squader.Api.Areas.Authentication.Dtos;
 using Squader.Common.Extensions;
 using Squader.Cqrs;
+using Squader.ReadModel.Users.Queries;
+using Squader.ReadModel.Users.QueryResults;
 
 namespace Squader.Api.Areas.Authentication.Controllers
 {
@@ -20,15 +22,8 @@ namespace Squader.Api.Areas.Authentication.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync(UserForLoginDto user)
         {
-            if(user.Username.IsEmail())
-            //call EmailCommand
-            { }
-            else
-            // call usernameCommand
-            { }
-             
-
-            
+            var query = new GetUserForLoginQuery(user.Username);
+            var queryResult = queryBus.ExecuteAsync<GetUserForLoginQuery, GetUserForLoginQueryResult>(query);
 
 
 
