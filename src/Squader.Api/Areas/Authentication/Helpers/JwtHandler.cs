@@ -12,7 +12,7 @@ using Squader.Common.Settings;
 
 namespace Squader.Api.Areas.Authentication.Helpers
 {
-    public class JwtHandler 
+    public class JwtHandler :IJwtHandler
     {
         private readonly JwtSettings _jwtSettings;
         
@@ -54,6 +54,8 @@ namespace Squader.Api.Areas.Authentication.Helpers
 
         public async Task<JwtDto> CreateTokenByUserObject(UserForJwtDto user)
             => await CreateTokenAsync(user.Id, user.Role);
+
+        
 
         public async Task<JwtDto> RefreshTokenAsync(ClaimsPrincipal userToken)
         {

@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Squader.Common.Settings;
 using Squader.Common.Extensions;
+using Squader.Api.Areas.Authentication.Helpers;
 
 namespace Squader.Api
 {
@@ -72,12 +73,19 @@ namespace Squader.Api
                 });
             services.AddAuthorization(x => x.AddPolicy("admin", policy => policy.RequireRole("admin")));
 
+            //change to autofac injection
+            services.AddScoped<IJwtHandler, JwtHandler>();
+            services.AddScoped<IEncrypter, Encrypter>();
+
             var builder = new ContainerBuilder();
             builder.Populate(services);
             builder.RegisterModule(new ContainerModule(Configuration));
             ApplicationContainer = builder.Build();
 
             return new AutofacServiceProvider(ApplicationContainer);
+
+
+            
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace Squader.Api.Areas.Authentication.Helpers
 {
-    public class Encrypter
+    public class Encrypter : IEncrypter
     {
         private static readonly int DeriveBytesIterationsCount = 10000;
         private static readonly int SaltSize = 40;
