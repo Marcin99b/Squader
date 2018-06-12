@@ -1,6 +1,6 @@
 using System;
-using System.Threading.Tasks;
 using Autofac;
+using Autofac.Core;
 
 namespace Squader.Cqrs
 {
@@ -11,19 +11,18 @@ namespace Squader.Cqrs
         {
             _context = context;
         }
-        
-        public async Task<W> ExecuteAsync<T, W>(T query)
-            where T : IQuery
-            where W : IQueryResult
+
+        public W Execute<W>(IQuery<W> query) where W : IQueryResult
         {
             if (query == null)
             {
                 throw new ArgumentNullException(nameof(query),
-                    $"Query: '{typeof(T).Name}' can not be null.");
+                    $"Query: '{query.GetType().Name}' can not be null.");
             }
-            var handler = _context.Resolve<IQueryHandler<T,W>>();
-
-            return await handler.HandleAsync(query);
+            var handlerType = typeof(IQueryHandler<,>)
+                .MakeGenericType(query.GetType(), typeof(W));
+            dynamic handler = _context.Resolve(handlerType);
+            return handler.Handle((dynamic)query);
         }
     }
 }
