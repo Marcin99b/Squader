@@ -1,4 +1,5 @@
-﻿using Squader.Cqrs;
+﻿using Squader.Common.Extensions;
+using Squader.Cqrs;
 using Squader.ReadModel.Users.Queries;
 using Squader.ReadModel.Users.QueryResults;
 using System;
@@ -12,6 +13,7 @@ namespace Squader.ReadModel.Users.Handlers
     {
         public Task<GetUserForLoginQueryResult> HandleAsync(GetUserForLoginQuery query)
         {
+            if (query.UserIdentifier.IsEmail()) { }
             throw new NotImplementedException();
         }
     }
