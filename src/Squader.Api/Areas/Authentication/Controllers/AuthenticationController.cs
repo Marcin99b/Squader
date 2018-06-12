@@ -40,6 +40,12 @@ namespace Squader.Api.Areas.Authentication.Controllers
             return Json(jwtToken);
         }
 
+        public async Task<IActionResult> RegisterAsync(UserForRegistrationDto user)
+        {
+
+            return Ok();
+        }
+
        
     }
 }
