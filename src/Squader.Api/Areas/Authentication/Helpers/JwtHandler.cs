@@ -9,6 +9,7 @@ using Squader.Api.Areas.Authentication.Dtos;
 using Squader.Common;
 using Squader.Common.Extensions;
 using Squader.Common.Settings;
+using Squader.ReadModel.Users.QueryResults;
 
 namespace Squader.Api.Areas.Authentication.Helpers
 {
@@ -52,7 +53,7 @@ namespace Squader.Api.Areas.Authentication.Helpers
             };
         }
 
-        public async Task<JwtDto> CreateTokenByUserObject(UserForJwtDto user)
+        public async Task<JwtDto> CreateTokenByUserObject(GetUserForLoginQueryResult user)
             => await CreateTokenAsync(user.Id, user.Role);
 
         

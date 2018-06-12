@@ -34,10 +34,10 @@ namespace Squader.Api.Areas.Authentication.Controllers
             var passHash = _encrypter.GetHash(user.Password, queryResult.Salt);
 
             if (passHash != queryResult.Password) return Unauthorized();
-             
 
+            var jwtToken = _jwtHandler.CreateTokenByUserObject(queryResult);
 
-            return Ok();
+            return Json(jwtToken);
         }
 
        
