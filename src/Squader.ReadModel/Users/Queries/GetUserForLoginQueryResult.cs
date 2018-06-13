@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Squader.ReadModel.Users
+namespace Squader.ReadModel.Users.Queries
 {
     public class GetUserForLoginQueryResult :IQueryResult
     {

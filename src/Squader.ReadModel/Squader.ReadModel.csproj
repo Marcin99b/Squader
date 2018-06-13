@@ -12,11 +12,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Squader.Common\Squader.Common.csproj" />
     <ProjectReference Include="..\Squader.Cqrs\Squader.Cqrs.csproj" />
-<<<<<<< HEAD
-=======
+
     <ProjectReference Include="..\Squader.DomainModel\Squader.DomainModel.csproj" />
     <ProjectReference Include="..\Squader.Infrastructure\Squader.Infrastructure.csproj" />
->>>>>>> Add_basic_user_domain_model
+
   </ItemGroup>
 
 </Project>

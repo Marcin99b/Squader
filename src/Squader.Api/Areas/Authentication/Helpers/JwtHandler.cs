@@ -10,6 +10,7 @@ using Squader.Common;
 using Squader.Common.Extensions;
 using Squader.Common.Settings;
 using Squader.ReadModel.Users;
+using Squader.ReadModel.Users.Queries;
 
 namespace Squader.Api.Areas.Authentication.Helpers
 {

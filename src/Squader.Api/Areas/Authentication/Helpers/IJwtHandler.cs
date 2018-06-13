@@ -1,8 +1,6 @@
 ﻿using Squader.Api.Areas.Authentication.Dtos;
-using Squader.ReadModel.Users;
+using Squader.ReadModel.Users.Queries;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
