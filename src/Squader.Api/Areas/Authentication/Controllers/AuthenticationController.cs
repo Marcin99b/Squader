@@ -35,6 +35,8 @@ namespace Squader.Api.Areas.Authentication.Controllers
         {
             var query = new GetUserByIdentifiersQuery(user.Username);
             var queryResult = queryBus.Execute(query);
+            if (queryResult == null)
+                return Unauthorized();
         
 
             var passHash = _encrypter.GetHash(user.Password, queryResult.User.Salt);
@@ -50,11 +52,11 @@ namespace Squader.Api.Areas.Authentication.Controllers
         public async Task<IActionResult> RegisterAsync([FromBody]UserForRegistrationRequest user)
         {
             var usernameQuery = new GetUserByIdentifiersQuery(user.Username);
-            if (queryBus.Execute(usernameQuery) == null)
+            if (queryBus.Execute(usernameQuery) != null)
                 return Json(new Exception($"Username : {user.Username} already exists"));
 
             var emailQuery = new GetUserByIdentifiersQuery(user.Email);
-            if(queryBus.Execute(emailQuery) == null)
+            if(queryBus.Execute(emailQuery) != null)
                 return Json(new Exception($"User with email : {user.Email} already exists"));
              
 

@@ -30,6 +30,7 @@ namespace Squader.DomainModel.Users
             SetSalt(salt);
             CreatedAt = DateTime.UtcNow;
             IsDeleted = false;
+            
         }
 
         public User(string username, string email, string hashPassword, string salt)
