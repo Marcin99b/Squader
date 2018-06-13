@@ -1,7 +1,5 @@
 ﻿using Squader.Common.Extensions;
 using Squader.Cqrs;
-using Squader.ReadModel.Users.Queries;
-using Squader.ReadModel.Users.QueryResults;
 using System;
 using System.Collections.Generic;
 using System.Text;
