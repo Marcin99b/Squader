@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+
 using Microsoft.Extensions.Logging;
 using Squader.Api.Areas.Authentication.Dtos;
 using Squader.Api.Areas.Authentication.Helpers;
@@ -22,12 +22,12 @@ namespace Squader.Api.Areas.Authentication.Controllers
         private readonly JwtSettings _jwtSettings;
 
         public AuthenticationController(ICommandBus commandBus, IQueryBus queryBus,
-            ILogger<AuthenticationController> logger, IJwtHandler jwtHandler, IEncrypter encrypter, IConfiguration configuration ) 
+            ILogger<AuthenticationController> logger, IJwtHandler jwtHandler, IEncrypter encrypter) 
             : base(commandBus, queryBus, logger)
         {
             _jwtHandler = jwtHandler;
             _encrypter = encrypter;
-            _jwtSettings = configuration.GetSettings<JwtSettings>();
+            
         }
         
         [HttpPost("login")]
@@ -35,6 +35,7 @@ namespace Squader.Api.Areas.Authentication.Controllers
         {
             var query = new GetUserForLoginQuery(user.Username);
             var queryResult = queryBus.Execute(query);
+        
 
             var passHash = _encrypter.GetHash(user.Password, queryResult.Salt);
 
@@ -47,7 +48,8 @@ namespace Squader.Api.Areas.Authentication.Controllers
 
         public async Task<IActionResult> RegisterAsync(UserForRegistrationDto user)
         {
-            var salt = _encrypter.GetSalt(_jwtSettings.Key);
+            //Validation here !
+            var salt = _encrypter.GetSalt();
             var passHash = _encrypter.GetHash(user.Password, salt);
 
             var command = new RegisterUserCommand(user.Username, user.Email, passHash, salt);

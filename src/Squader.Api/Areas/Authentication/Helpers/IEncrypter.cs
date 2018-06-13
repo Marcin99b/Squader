@@ -9,5 +9,6 @@ namespace Squader.Api.Areas.Authentication.Helpers
     {
         string GetSalt(string value);
         string GetHash(string value, string salt);
+        string GetSalt();
     }
 }
