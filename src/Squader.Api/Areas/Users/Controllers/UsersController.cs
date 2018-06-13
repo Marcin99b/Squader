@@ -16,19 +16,19 @@ namespace Squader.Api.Areas.Users.Controllers
         {
         }
 
-        [HttpGet]
-        public IActionResult GetUserById()
+        [HttpGet("{id}")]
+        public IActionResult GetUserById(Guid id)
         {
-            var query = new GetUserByIdQuery(Guid.NewGuid());
+            var query = new GetUserByIdQuery(id);
             var result = this.queryBus.Execute(query);
             Debug.WriteLine(result.User.Id);
             return Json(new UserDto(result.User));
         }
 
-        [HttpGet("test")]
-        public async Task<IActionResult> CreateNewUser()
+        [HttpPost]
+        public async Task<IActionResult> CreateNewUser([FromBody]CreateUserRequest request)
         {
-            var command = new CreateNewUserCommand();
+            var command = new CreateNewUserCommand(request.Username, request.Email, request.Forename, request.Surname, request.City, "", "");
             await this.commandBus.ExecuteAsync(command);
             return Ok();
         }

@@ -13,6 +13,7 @@ namespace Squader.Api.Areas.Users.Dtos
         public string City { get; private set; }
         public DateTime ChangedAt { get; private set; }
         public DateTime CreatedAt { get; private set; }
+        public bool IsDeleted { get; private set; }
 
         public UserDto(User user)
         {
@@ -24,6 +25,7 @@ namespace Squader.Api.Areas.Users.Dtos
             City = user.City;
             ChangedAt = user.ChangedAt;
             CreatedAt = user.CreatedAt;
+            IsDeleted = user.IsDeleted;
         }
     }
 }

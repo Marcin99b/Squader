@@ -13,9 +13,11 @@ namespace Squader.DomainModel.Users.Commands.Handlers
             this.usersRepository = usersRepository;
         }
 
-        public Task HandleAsync(CreateNewUserCommand command)
+        public async Task HandleAsync(CreateNewUserCommand command)
         {
-            throw new System.NotImplementedException();
+            var user = new User(command.Username, command.Email, command.Forename, command.Surname, command.City, 
+                command.HashPassword, command.Salt);
+            await usersRepository.AddAsync(user);
         }
     }
 }
