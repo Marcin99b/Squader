@@ -19,7 +19,7 @@ namespace Squader.Api.Areas.Authentication.Controllers
     {
         private readonly IJwtHandler _jwtHandler;
         private readonly IEncrypter _encrypter;
-        private readonly JwtSettings _jwtSettings;
+        
 
         public AuthenticationController(ICommandBus commandBus, IQueryBus queryBus,
             ILogger<AuthenticationController> logger, IJwtHandler jwtHandler, IEncrypter encrypter) 
@@ -31,15 +31,15 @@ namespace Squader.Api.Areas.Authentication.Controllers
         }
         
         [HttpPost("login")]
-        public async Task<IActionResult> LoginAsync([FromBody]UserForLoginRequest user)
+        public IActionResult Login([FromBody]UserForLoginRequest user)
         {
             var query = new GetUserByIdentifiersQuery(user.Username);
             var queryResult = queryBus.Execute(query);
         
 
-            var passHash = _encrypter.GetHash(user.Password, queryResult.Salt);
+            var passHash = _encrypter.GetHash(user.Password, queryResult.User.Salt);
 
-            if (passHash != queryResult.Password) return Unauthorized();
+            if (passHash != queryResult.User.HashPassword) return Unauthorized();
 
             var jwtToken = _jwtHandler.CreateTokenByUserObject(queryResult);
 

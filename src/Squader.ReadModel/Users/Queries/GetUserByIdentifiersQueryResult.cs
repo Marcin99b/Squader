@@ -1,4 +1,5 @@
 ﻿using Squader.Cqrs;
+using Squader.DomainModel.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,21 +10,11 @@ namespace Squader.ReadModel.Users.Queries
     {
        
 
-        public Guid Id { get; set; }
-        public string Email { get; set; }
-        public string Username { get; set; }
-        public string Role { get; set; }
-        public string Password { get; set; }
-        public string Salt { get; set; }
+        public User User { get;}
 
-        public GetUserByIdentifiersQueryResult(Guid id, string email, string username, string role, string password, string salt)
+        public GetUserByIdentifiersQueryResult(User user)
         {
-            Id = id;
-            Email = email;
-            Username = username;
-            Role = role;
-            Password = password;
-            Salt = salt;
+            User = user;
         }
     }
 }

@@ -40,5 +40,16 @@ namespace Squader.Infrastructure.Repositories
             });
             await Task.CompletedTask;
         }
+
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            return await Task.FromResult(users.FirstOrDefault(x => x.Email == email));
+        }
+
+        public async Task<User> GetUserByUsernameAsync(string username)
+        {
+            return await Task.FromResult(users.FirstOrDefault(x => x.Username == username));
+        }
+
     }
 }
