@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Squader.DomainModel.Repositories;
@@ -25,9 +26,9 @@ namespace Squader.Infrastructure.Repositories
             await Task.CompletedTask;
         }
 
-        public async Task<User> GetAsync(User user)
+        public async Task<User> GetAsync(Guid userId)
         {
-            return await Task.FromResult(users.FirstOrDefault(x => x.Id == user.Id));
+            return await Task.FromResult(users.FirstOrDefault(x => x.Id == userId));
         }
 
         public async Task UpdateAsync(User user)
