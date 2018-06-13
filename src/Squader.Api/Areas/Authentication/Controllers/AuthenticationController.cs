@@ -8,8 +8,7 @@ using Squader.Api.Areas.Authentication.Dtos;
 using Squader.Api.Areas.Authentication.Helpers;
 using Squader.Common.Extensions;
 using Squader.Cqrs;
-using Squader.ReadModel.Users.Queries;
-using Squader.ReadModel.Users.QueryResults;
+using Squader.ReadModel.Users;
 
 namespace Squader.Api.Areas.Authentication.Controllers
 {

@@ -1,5 +1,5 @@
 ﻿using Squader.Api.Areas.Authentication.Dtos;
-using Squader.ReadModel.Users.QueryResults;
+using Squader.ReadModel.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;

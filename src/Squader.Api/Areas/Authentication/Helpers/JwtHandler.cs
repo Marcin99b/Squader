@@ -9,7 +9,7 @@ using Squader.Api.Areas.Authentication.Dtos;
 using Squader.Common;
 using Squader.Common.Extensions;
 using Squader.Common.Settings;
-using Squader.ReadModel.Users.QueryResults;
+using Squader.ReadModel.Users;
 
 namespace Squader.Api.Areas.Authentication.Helpers
 {
