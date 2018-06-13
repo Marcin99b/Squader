@@ -70,7 +70,7 @@ namespace Squader.Api
                         SaveSigninToken = true
                     };
                 });
-            services.AddAuthorization(x => x.AddPolicy("admin", policy => policy.RequireRole("admin")));
+           // services.AddAuthorization(x => x.AddPolicy("admin", policy => policy.RequireRole("admin")));
 
             //change to autofac injection
             services.AddScoped<IJwtHandler, JwtHandler>();

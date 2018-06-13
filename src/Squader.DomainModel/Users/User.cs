@@ -39,6 +39,8 @@ namespace Squader.DomainModel.Users
             Email = email;
             HashPassword = hashPassword;
             Salt = salt;
+            CreatedAt = DateTime.UtcNow;
+            IsDeleted = false;
         }
 
         public void SetUsername(string username)

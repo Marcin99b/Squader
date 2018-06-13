@@ -21,25 +21,25 @@ namespace Squader.ReadModel.Users.Queries.Handlers
         {
             if (query.UserIdentifier.IsEmail())
             {
-                var user = usersRepository.GetUserByEmailAsync(query.UserIdentifier).Result;
+                var userWithEmail = usersRepository.GetUserByEmailAsync(query.UserIdentifier).Result;
 
-                if (user == null)
+                if (userWithEmail == null)
                     return null;
 
-                return new GetUserByIdentifiersQueryResult(user);
+                return new GetUserByIdentifiersQueryResult(userWithEmail);
                 
 
             }
                 
-            else
-            {
-                var user = usersRepository.GetUserByUsernameAsync(query.UserIdentifier).Result;
+            
+            
+                var userWithUsername = usersRepository.GetUserByUsernameAsync(query.UserIdentifier).Result;
 
-                if (user == null)
+                if (userWithUsername == null)
                     return null;
 
-                return new GetUserByIdentifiersQueryResult(user);
-            }
+                return new GetUserByIdentifiersQueryResult(userWithUsername);
+            
 
 
         }

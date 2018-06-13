@@ -31,7 +31,7 @@ namespace Squader.Api.Areas.Authentication.Controllers
         }
         
         [HttpPost("login")]
-        public IActionResult Login([FromBody]UserForLoginRequest user)
+        public IActionResult Login([FromBody]LoginRequest user)
         {
             var query = new GetUserByIdentifiersQuery(user.Username);
             var queryResult = queryBus.Execute(query);
@@ -43,13 +43,13 @@ namespace Squader.Api.Areas.Authentication.Controllers
 
             if (passHash != queryResult.User.HashPassword) return Unauthorized();
 
-            var jwtToken = _jwtHandler.CreateTokenByUserObject(queryResult);
+            var jwtToken = _jwtHandler.CreateTokenByUserObject(queryResult.User);
 
             return Json(jwtToken);
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterAsync([FromBody]UserForRegistrationRequest user)
+        public async Task<IActionResult> RegisterAsync([FromBody]RegistrationRequest user)
         {
             var usernameQuery = new GetUserByIdentifiersQuery(user.Username);
             if (queryBus.Execute(usernameQuery) != null)

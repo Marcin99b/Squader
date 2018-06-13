@@ -9,6 +9,7 @@ using Squader.Api.Areas.Authentication.Dtos;
 using Squader.Common;
 using Squader.Common.Extensions;
 using Squader.Common.Settings;
+using Squader.DomainModel.Users;
 using Squader.ReadModel.Users;
 using Squader.ReadModel.Users.Queries;
 
@@ -54,8 +55,8 @@ namespace Squader.Api.Areas.Authentication.Helpers
             };
         }
 
-        public async Task<JwtDto> CreateTokenByUserObject(GetUserByIdentifiersQueryResult user)
-            => await CreateTokenAsync(user.User.Id, user.User.Role);
+        public async Task<JwtDto> CreateTokenByUserObject(User user)
+            => await CreateTokenAsync(user.Id, user.Role);
 
         
 

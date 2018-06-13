@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace Squader.Api.Areas.Authentication.Dtos
 {
-    public class UserForLoginRequest
+    public class RegistrationRequest
     {
         public string Username { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
     }
 }
