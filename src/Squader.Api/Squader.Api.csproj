@@ -6,8 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Users\Controllers\" />
-    <Folder Include="Areas\Users\ViewModels\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

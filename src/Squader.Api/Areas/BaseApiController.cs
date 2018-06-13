@@ -1,6 +1,4 @@
-﻿using Autofac.Core.Lifetime;
-using Autofac.Core.Registration;
-using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Squader.Cqrs;
