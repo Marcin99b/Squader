@@ -31,7 +31,7 @@ namespace Squader.Api.Areas.Authentication.Controllers
         }
         
         [HttpPost("login")]
-        public async Task<IActionResult> LoginAsync(UserForLoginDto user)
+        public async Task<IActionResult> LoginAsync([FromBody]UserForLoginRequest user)
         {
             var query = new GetUserByIdentifiersQuery(user.Username);
             var queryResult = queryBus.Execute(query);
@@ -46,7 +46,8 @@ namespace Squader.Api.Areas.Authentication.Controllers
             return Json(jwtToken);
         }
 
-        public async Task<IActionResult> RegisterAsync(UserForRegistrationDto user)
+        [HttpPost("register")]
+        public async Task<IActionResult> RegisterAsync([FromBody]UserForRegistrationRequest user)
         {
             var usernameQuery = new GetUserByIdentifiersQuery(user.Username);
             if (queryBus.Execute(usernameQuery) == null)

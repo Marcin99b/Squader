@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Squader.Api.Areas.Authentication.Dtos
 {
-    public class UserForLoginDto
+    public class UserForLoginRequest
     {
         public string Username { get; set; }
         public string Password { get; set; }

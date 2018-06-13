@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Squader.Api.Areas.Authentication.Dtos
 {
-    public class UserForRegistrationDto
+    public class UserForRegistrationRequest
     {
         public string Username { get; set; }
         public string Email { get; set; }
