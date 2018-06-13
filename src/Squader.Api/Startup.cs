@@ -10,6 +10,7 @@ using Squader.IoC;
 using Squader.Common;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Squader.Api
 {
@@ -21,14 +22,6 @@ namespace Squader.Api
 
         public Startup(IHostingEnvironment env)
         {
-            var assembly = AppDomain.CurrentDomain.GetAssemblies();
-
-            foreach (Assembly an in assembly)
-            {
-                //if (an.FullName.Contains("Squader"))
-                    //Debug.WriteLine(an.FullName);
-            }
-
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -51,6 +44,22 @@ namespace Squader.Api
                     });
             });
             services.AddMvc();
+            services.AddSwaggerGen(x =>
+                {
+                    x.SwaggerDoc("v1", new Info
+                    {
+                        Title = "Squader",
+                        Version = "v1"
+                    });
+                    x.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                    {
+                        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                        Name = "Authorization",
+                        In = "header",
+                        Type = "apiKey"
+                    });
+                }
+            );
 
             var builder = new ContainerBuilder();
             builder.Populate(services);
@@ -69,7 +78,8 @@ namespace Squader.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseSwagger();
+            app.UseSwaggerUI(x => x.SwaggerEndpoint("/swagger/v1/swagger.json", "Squader"));
             app.UseMvc();
         }
     }
