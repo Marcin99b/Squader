@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Autofac;
 using Squader.Cqrs;
-using Squader.DomainModel.Advertisements.Commands;
-using Squader.DomainModel.Advertisements.Commands.Handlers;
 
 namespace Squader.IoC.Modules
 {

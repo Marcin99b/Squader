@@ -24,7 +24,7 @@ namespace Squader.DomainModel.Users
         public User(string username, string email, string forename, string surname, string city, string hashPassword,
             string salt)
         {
-            Id = Guid.NewGuid().ToShort();
+            Id = Guid.NewGuid();
             SetUsername(username);
             SetEmail(email);
             SetForename(forename);

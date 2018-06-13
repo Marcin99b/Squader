@@ -13,7 +13,6 @@
     <ProjectReference Include="..\Squader.Common\Squader.Common.csproj" />
     <ProjectReference Include="..\Squader.Cqrs\Squader.Cqrs.csproj" />
     <ProjectReference Include="..\Squader.DomainModel\Squader.DomainModel.csproj" />
-    <ProjectReference Include="..\Squader.Infrastructure\Squader.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
