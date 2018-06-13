@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Squader.ReadModel.Users.Queries
 {
-    public class GetUserForLoginQuery : IQuery<GetUserForLoginQueryResult>
+    public class GetUserByIdentifiersQuery : IQuery<GetUserByIdentifiersQueryResult>
     {
         public string UserIdentifier { get; set; }
 
-        public GetUserForLoginQuery(string identifier)
+        public GetUserByIdentifiersQuery(string identifier)
         {
             UserIdentifier = identifier;
         }

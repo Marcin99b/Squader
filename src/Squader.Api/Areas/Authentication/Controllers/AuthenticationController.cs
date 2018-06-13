@@ -33,7 +33,7 @@ namespace Squader.Api.Areas.Authentication.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync(UserForLoginDto user)
         {
-            var query = new GetUserForLoginQuery(user.Username);
+            var query = new GetUserByIdentifiersQuery(user.Username);
             var queryResult = queryBus.Execute(query);
         
 
@@ -48,7 +48,15 @@ namespace Squader.Api.Areas.Authentication.Controllers
 
         public async Task<IActionResult> RegisterAsync(UserForRegistrationDto user)
         {
-            //Validation here !
+            var usernameQuery = new GetUserByIdentifiersQuery(user.Username);
+            if (queryBus.Execute(usernameQuery) == null)
+                return Json(new Exception($"Username : {user.Username} already exists"));
+
+            var emailQuery = new GetUserByIdentifiersQuery(user.Email);
+            if(queryBus.Execute(emailQuery) == null)
+                return Json(new Exception($"User with email : {user.Email} already exists"));
+             
+
             var salt = _encrypter.GetSalt();
             var passHash = _encrypter.GetHash(user.Password, salt);
 

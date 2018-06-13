@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Squader.ReadModel.Users.Queries
 {
-    public class GetUserForLoginQueryResult :IQueryResult
+    public class GetUserByIdentifiersQueryResult :IQueryResult
     {
        
 
@@ -16,7 +16,7 @@ namespace Squader.ReadModel.Users.Queries
         public string Password { get; set; }
         public string Salt { get; set; }
 
-        public GetUserForLoginQueryResult(Guid id, string email, string username, string role, string password, string salt)
+        public GetUserByIdentifiersQueryResult(Guid id, string email, string username, string role, string password, string salt)
         {
             Id = id;
             Email = email;

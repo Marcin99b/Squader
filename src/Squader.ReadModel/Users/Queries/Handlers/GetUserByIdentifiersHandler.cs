@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Squader.ReadModel.Users.Queries.Handlers
 {
-    public class GetUserForLoginHandler : IQueryHandler<GetUserForLoginQuery, GetUserForLoginQueryResult>
+    public class GetUserByIdentifiersHandler : IQueryHandler<GetUserByIdentifiersQuery, GetUserByIdentifiersQueryResult>
     {
-        public GetUserForLoginQueryResult Handle(GetUserForLoginQuery query)
+        public GetUserByIdentifiersQueryResult Handle(GetUserByIdentifiersQuery query)
         {
             if (query.UserIdentifier.IsEmail()) { }
             throw new NotImplementedException();

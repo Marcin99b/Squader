@@ -54,7 +54,7 @@ namespace Squader.Api.Areas.Authentication.Helpers
             };
         }
 
-        public async Task<JwtDto> CreateTokenByUserObject(GetUserForLoginQueryResult user)
+        public async Task<JwtDto> CreateTokenByUserObject(GetUserByIdentifiersQueryResult user)
             => await CreateTokenAsync(user.Id, user.Role);
 
         
