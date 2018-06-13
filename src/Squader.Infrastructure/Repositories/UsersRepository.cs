@@ -9,7 +9,7 @@ namespace Squader.Infrastructure.Repositories
 {
     public class UsersRepository : IUsersRepository
     {
-        private readonly List<User> users = new List<User>
+        private static readonly List<User> users = new List<User>
         {
             new User("ffa", "grsgesr", "gsgs", "efea", "gesgs", "degfes", "grsgsr"),
             new User("ffa", "grsgesr", "gsgs", "efea", "gesgs", "degfes", "grsgsr"),
@@ -40,5 +40,16 @@ namespace Squader.Infrastructure.Repositories
             });
             await Task.CompletedTask;
         }
+
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            return await Task.FromResult(users.FirstOrDefault(x => x.Email == email));
+        }
+
+        public async Task<User> GetUserByUsernameAsync(string username)
+        {
+            return await Task.FromResult(users.FirstOrDefault(x => x.Username == username));
+        }
+
     }
 }

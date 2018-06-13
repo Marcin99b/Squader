@@ -10,6 +10,12 @@ using Squader.IoC;
 using Squader.Common;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
+using Squader.Common.Settings;
+using Squader.Common.Extensions;
+using Squader.Api.Areas.Authentication.Helpers;
 
 namespace Squader.Api
 {
@@ -51,6 +57,24 @@ namespace Squader.Api
                     });
             });
             services.AddMvc();
+            var jwtSettings = Configuration.GetSettings<JwtSettings>();
+            
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidIssuer = jwtSettings.Issuer,
+                        ValidateAudience = false,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key)),
+                        SaveSigninToken = true
+                    };
+                });
+           // services.AddAuthorization(x => x.AddPolicy("admin", policy => policy.RequireRole("admin")));
+
+            //change to autofac injection
+            services.AddScoped<IJwtHandler, JwtHandler>();
+            services.AddScoped<IEncrypter, Encrypter>();
 
             var builder = new ContainerBuilder();
             builder.Populate(services);
@@ -58,6 +82,9 @@ namespace Squader.Api
             ApplicationContainer = builder.Build();
 
             return new AutofacServiceProvider(ApplicationContainer);
+
+
+            
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

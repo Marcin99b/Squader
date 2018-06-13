@@ -15,6 +15,7 @@ namespace Squader.DomainModel.Users
         public DateTime ChangedAt { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public bool IsDeleted { get; private set; }
+        public string Role { get; private set; }
         
         public User(string username, string email, string forename, string surname, string city, string hashPassword,
             string salt)
@@ -27,6 +28,17 @@ namespace Squader.DomainModel.Users
             SetCity(city);
             SethashPassword(hashPassword);
             SetSalt(salt);
+            CreatedAt = DateTime.UtcNow;
+            IsDeleted = false;
+            
+        }
+
+        public User(string username, string email, string hashPassword, string salt)
+        {
+            Username = username;
+            Email = email;
+            HashPassword = hashPassword;
+            Salt = salt;
             CreatedAt = DateTime.UtcNow;
             IsDeleted = false;
         }
