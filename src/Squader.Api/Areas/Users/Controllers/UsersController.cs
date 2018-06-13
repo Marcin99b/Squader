@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Squader.Api.Areas.Users.Dtos;
 using Squader.Cqrs;
+using Squader.DomainModel.Users.Commands;
 using Squader.ReadModel.Users.Queries;
 
 namespace Squader.Api.Areas.Users.Controllers
@@ -15,13 +16,21 @@ namespace Squader.Api.Areas.Users.Controllers
         {
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetUserById()
+        [HttpGet("{id}")]
+        public IActionResult GetUserById(Guid id)
         {
-            var query = new GetUserByIdQuery(Guid.NewGuid());
+            var query = new GetUserByIdQuery(id);
             var result = this.queryBus.Execute(query);
             Debug.WriteLine(result.User.Id);
             return Json(new UserDto(result.User));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateNewUser([FromBody]CreateUserRequest request)
+        {
+            var command = new CreateNewUserCommand(request.Username, request.Email, request.Forename, request.Surname, request.City, "", "");
+            await this.commandBus.ExecuteAsync(command);
+            return Ok();
         }
     }
 }

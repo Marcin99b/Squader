@@ -17,6 +17,7 @@ namespace Squader.IoC
         {
             builder.RegisterModule<CommandModule>();
             builder.RegisterModule<QueryModule>();
+            builder.RegisterModule<RepositoryModule>();
         }
     }
 }

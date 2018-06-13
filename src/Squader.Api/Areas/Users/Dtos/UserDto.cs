@@ -5,14 +5,17 @@ namespace Squader.Api.Areas.Users.Dtos
 {
     public class UserDto
     {
-        public Guid Id { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Forename { get; set; }
-        public string Surname { get; set; }
-        public string City { get; set; }
-        public DateTime ChangedAt { get; set; }
-        public DateTime CreatedAt { get; set; }
+
+        public Guid Id { get; private set; }
+        public string Username { get; private set; }
+        public string Email { get; private set; }
+        public string Forename { get; private set; }
+        public string Surname { get; private set; }
+        public string City { get; private set; }
+        public DateTime ChangedAt { get; private set; }
+        public DateTime CreatedAt { get; private set; }
+        public bool IsDeleted { get; private set; }
+
 
         public UserDto(User user)
         {
@@ -24,6 +27,7 @@ namespace Squader.Api.Areas.Users.Dtos
             City = user.City;
             ChangedAt = user.ChangedAt;
             CreatedAt = user.CreatedAt;
+            IsDeleted = user.IsDeleted;
         }
     }
 }

@@ -1,6 +1,4 @@
 ﻿using System;
-using Squader.Common;
-using Squader.Common.CustomObjects;
 
 namespace Squader.DomainModel.Users
 {
@@ -16,15 +14,12 @@ namespace Squader.DomainModel.Users
         public string Salt { get; private set; }
         public DateTime ChangedAt { get; private set; }
         public DateTime CreatedAt { get; private set; }
-
-        public User()
-        {
-        }
-
+        public bool IsDeleted { get; private set; }
+        
         public User(string username, string email, string forename, string surname, string city, string hashPassword,
             string salt)
         {
-            Id = Guid.NewGuid().ToShort();
+            Id = Guid.NewGuid();
             SetUsername(username);
             SetEmail(email);
             SetForename(forename);
@@ -33,6 +28,7 @@ namespace Squader.DomainModel.Users
             SethashPassword(hashPassword);
             SetSalt(salt);
             CreatedAt = DateTime.UtcNow;
+            IsDeleted = false;
         }
 
         public void SetUsername(string username)
@@ -75,6 +71,11 @@ namespace Squader.DomainModel.Users
         {
             Salt = salt;
             UpdateVersion();
+        }
+
+        public void Delete()
+        {
+            IsDeleted = true;
         }
 
         private void UpdateVersion()
