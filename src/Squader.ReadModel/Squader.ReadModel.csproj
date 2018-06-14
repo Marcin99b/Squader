@@ -4,4 +4,19 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Serilog" Version="2.7.1" />
+    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.1-dev-00771" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Squader.Common\Squader.Common.csproj" />
+    <ProjectReference Include="..\Squader.Cqrs\Squader.Cqrs.csproj" />
+
+    <ProjectReference Include="..\Squader.DomainModel\Squader.DomainModel.csproj" />
+
+    <ProjectReference Include="..\Squader.Infrastructure\Squader.Infrastructure.csproj" />
+
+  </ItemGroup>
+
 </Project>
