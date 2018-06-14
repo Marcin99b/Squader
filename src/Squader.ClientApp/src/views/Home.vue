@@ -1,18 +1,22 @@
 <template>
   <div class="home">
-    <img src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="tekst">
+      {{ 'Hello' | translate}}
+    </div>
+    <button @click="changeLang('en')">Translate into English</button>
+    <button @click="changeLang('pl')">Przetłumacz na Polski</button>
+    <button @click="changeLang('de')">Auf Deutsch übersetzen</button>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
   name: "home",
-  components: {
-    HelloWorld
+  methods:{
+    changeLang(lang) {
+      this.$store.dispatch('changeLanguage', lang);
+    }
   }
 };
 </script>
