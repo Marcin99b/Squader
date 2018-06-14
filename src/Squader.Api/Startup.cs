@@ -1,16 +1,22 @@
-﻿using System;
+using System;
 using System.Reflection;
+using System.Text;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Swashbuckle.AspNetCore.Swagger;
+using Serilog;
 using Squader.IoC;
 using Squader.Common;
-using Microsoft.Extensions.Logging;
-using Serilog;
-using Swashbuckle.AspNetCore.Swagger;
+using Squader.Common.Settings;
+using Squader.Common.Extensions;
+using Squader.Api.Areas.Authentication.Helpers;
 
 namespace Squader.Api
 {
@@ -43,6 +49,26 @@ namespace Squader.Api
                         x.AllowCredentials();
                     });
             });
+            
+            var jwtSettings = Configuration.GetSettings<JwtSettings>();
+            
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidIssuer = jwtSettings.Issuer,
+                        ValidateAudience = false,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key)),
+                        SaveSigninToken = true
+                    };
+                });
+           // services.AddAuthorization(x => x.AddPolicy("admin", policy => policy.RequireRole("admin")));
+
+            //change to autofac injection
+            services.AddScoped<IJwtHandler, JwtHandler>();
+            services.AddScoped<IEncrypter, Encrypter>();
+
             services.AddMvc();
             services.AddSwaggerGen(x =>
                 {
@@ -60,13 +86,16 @@ namespace Squader.Api
                     });
                 }
             );
-
+            
             var builder = new ContainerBuilder();
             builder.Populate(services);
             builder.RegisterModule(new ContainerModule(Configuration));
             ApplicationContainer = builder.Build();
 
             return new AutofacServiceProvider(ApplicationContainer);
+
+
+            
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

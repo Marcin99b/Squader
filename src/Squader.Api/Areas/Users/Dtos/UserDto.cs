@@ -5,6 +5,7 @@ namespace Squader.Api.Areas.Users.Dtos
 {
     public class UserDto
     {
+
         public Guid Id { get; private set; }
         public string Username { get; private set; }
         public string Email { get; private set; }
@@ -14,6 +15,7 @@ namespace Squader.Api.Areas.Users.Dtos
         public DateTime ChangedAt { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public bool IsDeleted { get; private set; }
+
 
         public UserDto(User user)
         {
