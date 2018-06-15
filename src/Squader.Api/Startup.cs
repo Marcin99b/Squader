@@ -102,13 +102,15 @@ namespace Squader.Api
         {
             loggerFactory.AddSerilog();
             ConfigureSerilog.Configure();
-
-            if (env.IsDevelopment())
-            {
+#if DEBUG
                 app.UseDeveloperExceptionPage();
-            }
-            app.UseSwagger();
-            app.UseSwaggerUI(x => x.SwaggerEndpoint("/swagger/v1/swagger.json", "Squader"));
+                app.UseSwagger();
+                app.UseSwaggerUI(x =>
+                {
+                    x.SwaggerEndpoint("swagger/v1/swagger.json", "Squader");
+                    x.RoutePrefix = "";
+                });
+#endif
             app.UseMvc();
         }
     }
