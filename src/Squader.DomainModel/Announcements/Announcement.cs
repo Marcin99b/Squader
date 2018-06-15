@@ -53,41 +53,69 @@ namespace Squader.DomainModel.Announcements
 
         public void SetTitle(string title)
         {
+            if (title == null)
+            {
+                return;
+            }
             this.Title = title;
             UpdateVersion();
         }
 
         public void SetShortDescription(string shortDescription)
         {
+            if (shortDescription == null)
+            {
+                return;
+            }
             this.ShortDescription = shortDescription;
             UpdateVersion();
         }
 
         public void SetDescription(string description)
         {
+            if (description == null)
+            {
+                return;
+            }
             this.Description = description;
         }
 
         public void SetRequirements(IEnumerable<string> requirements)
         {
+            if (requirements == null)
+            {
+                return;
+            }
             Requirements = requirements;
             UpdateVersion();
         }
 
         public void SetRequirements(Action<IEnumerable<string>> action)
         {
+            if (action == null)
+            {
+                return;
+            }
             action.Invoke(Requirements);
             UpdateVersion();
         }
 
         public void SetTags(Action<IEnumerable<string>> action)
         {
+            if (action == null)
+            {
+                return;
+            }
             action.Invoke(Tags);
             UpdateVersion();
         }
 
         public void SetTags(IEnumerable<string> tags)
         {
+            if (tags == null)
+            {
+                return;
+            }
             Tags = tags;
             UpdateVersion();
         }
