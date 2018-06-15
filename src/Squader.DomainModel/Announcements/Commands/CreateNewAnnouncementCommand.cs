@@ -12,16 +12,8 @@ namespace Squader.DomainModel.Announcements.Commands
         public string Description { get; private set; }
         public IEnumerable<string> Requirements { get; private set; }
         public IEnumerable<string> Tags { get; private set; }
-
-        public CreateNewAnnouncementCommand(User author, string title, string shortDescription, string description)
-        {
-            Author = author;
-            Title = title;
-            ShortDescription = shortDescription;
-            Description = description;
-        }
-
-        public CreateNewAnnouncementCommand(User author, string title, string shortDescription, string description, IEnumerable<string> requirements, IEnumerable<string> tags)
+        
+        public CreateNewAnnouncementCommand(User author, string title, string shortDescription, string description, IEnumerable<string> requirements = null, IEnumerable<string> tags = null)
         {
             Author = author;
             Title = title;

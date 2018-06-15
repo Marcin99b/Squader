@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.ComTypes;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Squader.Cqrs;
 using Squader.DomainModel.Repositories;
 
