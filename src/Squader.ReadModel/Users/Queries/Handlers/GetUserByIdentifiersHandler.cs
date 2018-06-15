@@ -2,6 +2,7 @@
 using Squader.Cqrs;
 using Squader.DomainModel.Repositories;
 using Squader.DomainModel.Users;
+using Squader.Infrastructure.DAL;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,9 +13,11 @@ namespace Squader.ReadModel.Users.Queries.Handlers
     public class GetUserByIdentifiersHandler : IQueryHandler<GetUserByIdentifiersQuery, GetUserByIdentifiersQueryResult>
     {
         private readonly IUsersRepository usersRepository;
-        public GetUserByIdentifiersHandler(IUsersRepository userRepository)
+        private readonly IContext context;
+        public GetUserByIdentifiersHandler(IUsersRepository userRepository, IContext context)
         {
             this.usersRepository = userRepository;
+            this.context = context;
         }
 
         public GetUserByIdentifiersQueryResult Handle(GetUserByIdentifiersQuery query)

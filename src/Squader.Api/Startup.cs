@@ -16,6 +16,8 @@ using System.Text;
 using Squader.Common.Settings;
 using Squader.Common.Extensions;
 using Squader.Api.Areas.Authentication.Helpers;
+using Microsoft.EntityFrameworkCore;
+using Squader.Infrastructure.DAL;
 
 namespace Squader.Api
 {
@@ -58,6 +60,8 @@ namespace Squader.Api
             });
             services.AddMvc();
             var jwtSettings = Configuration.GetSettings<JwtSettings>();
+
+           
             
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -80,6 +84,7 @@ namespace Squader.Api
             builder.Populate(services);
             builder.RegisterModule(new ContainerModule(Configuration));
             ApplicationContainer = builder.Build();
+
 
             return new AutofacServiceProvider(ApplicationContainer);
 
