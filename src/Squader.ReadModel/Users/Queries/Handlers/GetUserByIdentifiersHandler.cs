@@ -2,7 +2,6 @@
 using Squader.Cqrs;
 using Squader.DomainModel.Repositories;
 using Squader.DomainModel.Users;
-using Squader.Infrastructure.DAL;
 using System;
 using System.Collections.Generic;
 using System.Text;
