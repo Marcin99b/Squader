@@ -19,9 +19,10 @@ namespace Squader.DomainModel.Teams
         public DateTime CreatedAt { get; private set; }
         public bool Deleted { get; private set; }
 
-        public Team(string Title, string Description)
+        public Team(string title, string description)
         {
-
+            SetTitle(title);
+            SetDescription(description);
             CreatedAt = DateTime.UtcNow;
         }
 
@@ -55,7 +56,7 @@ namespace Squader.DomainModel.Teams
             UpdateVersion();
         }
 
-        public void SetUsers(Action<IEnumerable<UserTeam>> action)
+        public void SetUsers(Action<ISet<UserTeam>> action)
         {
             if (action == null)
             {
