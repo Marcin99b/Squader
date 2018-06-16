@@ -11,7 +11,9 @@ namespace Squader.IoC.Modules
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType(typeof(ApplicationDbContext)).As(typeof(IContext)).InstancePerLifetimeScope();
+            builder.RegisterType(typeof(ApplicationDbContext))
+                .As(typeof(IContext))
+                .InstancePerLifetimeScope();
         }
     }
 }

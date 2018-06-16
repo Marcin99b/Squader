@@ -14,6 +14,7 @@ namespace Squader.ReadModel.Users.Queries.Handlers
     {
         private readonly IUsersRepository usersRepository;
         private readonly IContext context;
+
         public GetUserByIdentifiersHandler(IUsersRepository userRepository, IContext context)
         {
             this.usersRepository = userRepository;
