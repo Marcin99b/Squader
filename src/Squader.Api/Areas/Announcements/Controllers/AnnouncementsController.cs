@@ -14,13 +14,5 @@ namespace Squader.Api.Areas.Announcements.Controllers
             
         }
         
-        [HttpGet("create")] //should http post, but get is easier for manual tests
-        public async Task<IActionResult> CreateNewAnnouncementAsync()
-        {
-            var command = new CreateNewAnnouncementCommand("test", "test");
-            await this.commandBus.ExecuteAsync(command);
-            logger.LogInformation("Logger works !");
-            return Ok();
-        }
     }
 }
