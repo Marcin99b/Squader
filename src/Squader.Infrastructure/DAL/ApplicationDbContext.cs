@@ -7,12 +7,14 @@ using System.Linq;
 using Squader.DomainModel.Users;
 using Squader.DomainModel.Announcements;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Squader.Infrastructure.DAL
 {
     public class ApplicationDbContext : DbContext, IContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        public ApplicationDbContext() { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,15 +31,13 @@ namespace Squader.Infrastructure.DAL
             return base.SaveChanges();
         }
         
-        /*
-        public  async Task SaveChangesAsync()
+        
+        public  async Task<int> SaveChangesAsync()
         {
-            return await base.SaveChangesAsync();
+            return await this.SaveChangesAsync(CancellationToken.None);
         }
-        */
+        
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Announcement> Announcements { get; set; }
 
     }
 }

@@ -5,11 +5,20 @@ using System.Threading.Tasks;
 using Squader.DomainModel.Announcements;
 using Squader.DomainModel.Repositories;
 using Squader.DomainModel.Users;
+using Squader.Infrastructure.DAL;
 
 namespace Squader.Infrastructure.Repositories
 {
     public class AnnouncementsRepository : IAnnouncementsRepository
     {
+        private readonly IContext context;
+
+        public AnnouncementsRepository(IContext context)
+        {
+            this.context = context;
+        }
+
+
         private static readonly List<Announcement> announcements = new List<Announcement>
         {
             new Announcement(new User("gesgs", "gefa", "ges", "ges"), "dadsa", "gesges", "edgeas"),

@@ -30,6 +30,7 @@ namespace Squader.Infrastructure.Repositories
         public async Task AddAsync(User user)
         {
             users.Add(user);
+            
             await Task.CompletedTask;
         }
 

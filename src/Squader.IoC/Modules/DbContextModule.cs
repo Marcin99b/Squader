@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using Autofac;
+using Microsoft.EntityFrameworkCore;
 using Squader.Infrastructure.DAL;
 
 namespace Squader.IoC.Modules
@@ -11,8 +13,9 @@ namespace Squader.IoC.Modules
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType(typeof(ApplicationDbContext))
-                .As(typeof(IContext))
+
+            builder.RegisterType<ApplicationDbContext>()
+                .As<IContext>()
                 .InstancePerLifetimeScope();
         }
     }

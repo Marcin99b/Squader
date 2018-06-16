@@ -4,13 +4,13 @@ using Squader.DomainModel.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Squader.Infrastructure.DAL
 {
     public interface IContext
     {
-        DbSet<User> Users { get; set; }
-        DbSet<Announcement> Announcements { get; set; }
+        Task<int> SaveChangesAsync();
         int SaveChanges();
     }
 }

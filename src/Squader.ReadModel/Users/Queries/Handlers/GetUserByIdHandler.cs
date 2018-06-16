@@ -7,11 +7,11 @@ namespace Squader.ReadModel.Users.Queries.Handlers
 {
     public class GetUserByIdHandler : IQueryHandler<GetUserByIdQuery, GetUserByIdQueryResult>
     {
-        private readonly IContext context;
+        
 
-        public GetUserByIdHandler(IContext context)
+        public GetUserByIdHandler()
         {
-            this.context = context;
+            
         }
 
         public GetUserByIdQueryResult Handle(GetUserByIdQuery query)
