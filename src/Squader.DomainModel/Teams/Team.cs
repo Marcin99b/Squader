@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Squader.DomainModel.Users;
 
 namespace Squader.DomainModel.Teams
 {
@@ -19,10 +20,11 @@ namespace Squader.DomainModel.Teams
         public DateTime CreatedAt { get; private set; }
         public bool Deleted { get; private set; }
 
-        public Team(string title, string description)
+        public Team(User author, string title, string description)
         {
             SetTitle(title);
             SetDescription(description);
+            SetUsers(x => x.Add(new UserTeam(author, TeamRole.Owner)));
             CreatedAt = DateTime.UtcNow;
         }
 
