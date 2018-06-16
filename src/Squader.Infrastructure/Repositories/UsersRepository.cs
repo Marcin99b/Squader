@@ -4,11 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Squader.DomainModel.Repositories;
 using Squader.DomainModel.Users;
+using Squader.Infrastructure.DAL;
 
 namespace Squader.Infrastructure.Repositories
 {
     public class UsersRepository : IUsersRepository
     {
+        private readonly IContext context;
+        public UsersRepository(IContext context)
+        {
+            this.context = context;
+        }
+
         private static readonly List<User> users = new List<User>
         {
             new User("ffa", "grsgesr", "gsgs", "efea", "gesgs", "degfes", "grsgsr"),
@@ -23,6 +30,7 @@ namespace Squader.Infrastructure.Repositories
         public async Task AddAsync(User user)
         {
             users.Add(user);
+            
             await Task.CompletedTask;
         }
 
@@ -48,6 +56,7 @@ namespace Squader.Infrastructure.Repositories
 
         public async Task<User> GetUserByUsernameAsync(string username)
         {
+           
             return await Task.FromResult(users.FirstOrDefault(x => x.Username == username));
         }
 

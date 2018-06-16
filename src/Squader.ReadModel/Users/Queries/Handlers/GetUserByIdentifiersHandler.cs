@@ -12,9 +12,13 @@ namespace Squader.ReadModel.Users.Queries.Handlers
     public class GetUserByIdentifiersHandler : IQueryHandler<GetUserByIdentifiersQuery, GetUserByIdentifiersQueryResult>
     {
         private readonly IUsersRepository usersRepository;
+        
+
         public GetUserByIdentifiersHandler(IUsersRepository userRepository)
         {
             this.usersRepository = userRepository;
+            
+            
         }
 
         public GetUserByIdentifiersQueryResult Handle(GetUserByIdentifiersQuery query)
