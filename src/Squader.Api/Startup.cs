@@ -17,8 +17,7 @@ using Squader.Common;
 using Squader.Common.Settings;
 using Squader.Common.Extensions;
 using Squader.Api.Areas.Authentication.Helpers;
-using Microsoft.EntityFrameworkCore;
-using Squader.Infrastructure.DAL;
+
 
 namespace Squader.Api
 {
