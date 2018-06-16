@@ -15,5 +15,59 @@ namespace Squader.DomainModel.Teams
             get => users;
             private set => users = new HashSet<UserTeam>(value);
         }
+        public DateTime ChangedAt { get; private set; }
+        public DateTime CreatedAt { get; private set; }
+        public bool Deleted { get; private set; }
+
+        public Team(string Title, string Description)
+        {
+
+            CreatedAt = DateTime.UtcNow;
+        }
+
+        public void SetTitle(string title)
+        {
+            if (title == null)
+            {
+                return;
+            }
+            Title = title;
+            UpdateVersion();
+        }
+
+        public void SetDescription(string description)
+        {
+            if (description == null)
+            {
+                return;
+            }
+            Description = description;
+            UpdateVersion();
+        }
+
+        public void SetUsers(IEnumerable<UserTeam> users)
+        {
+            if (users == null)
+            {
+                return;
+            }
+            Users = users;
+            UpdateVersion();
+        }
+
+        public void SetUsers(Action<IEnumerable<UserTeam>> action)
+        {
+            if (action == null)
+            {
+                return;
+            }
+            action.Invoke(users);
+            UpdateVersion();
+        }
+
+        public void UpdateVersion()
+        {
+            ChangedAt = DateTime.UtcNow;
+        }
     }
 }
