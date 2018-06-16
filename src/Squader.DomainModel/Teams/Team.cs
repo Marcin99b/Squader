@@ -11,11 +11,13 @@ namespace Squader.DomainModel.Teams
         public Guid Id { get; private set; }
         public string Title { get; private set; }
         public string Description { get; private set; }
+
         public IEnumerable<UserTeam> Users
         {
             get => users;
             private set => users = new HashSet<UserTeam>(value);
         }
+
         public DateTime ChangedAt { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public bool Deleted { get; private set; }
@@ -72,5 +74,10 @@ namespace Squader.DomainModel.Teams
         {
             ChangedAt = DateTime.UtcNow;
         }
-    }
+
+        public void Delete()
+        {
+            Deleted = true;
+        }
+}
 }
