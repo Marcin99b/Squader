@@ -90,23 +90,23 @@ namespace Squader.DomainModel.Announcements
             UpdateVersion();
         }
 
-        public void SetRequirements(Action<IEnumerable<string>> action)
+        public void SetRequirements(Action<ISet<string>> action)
         {
             if (action == null)
             {
                 return;
             }
-            action.Invoke(Requirements);
+            action.Invoke(requirements);
             UpdateVersion();
         }
 
-        public void SetTags(Action<IEnumerable<string>> action)
+        public void SetTags(Action<ISet<string>> action)
         {
             if (action == null)
             {
                 return;
             }
-            action.Invoke(Tags);
+            action.Invoke(tags);
             UpdateVersion();
         }
 
