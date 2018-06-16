@@ -12,12 +12,12 @@ namespace Squader.DomainModel.Announcements.Commands
         public string Description { get; private set; }
         public IEnumerable<string> Requirements { get; private set; }
         public IEnumerable<string> Tags { get; private set; }
-        public Action<IEnumerable<string>> RequirementsAction { get; private set; }
-        public Action<IEnumerable<string>> TagsAction { get; private set; }
+        public Action<ISet<string>> RequirementsAction { get; private set; }
+        public Action<ISet<string>> TagsAction { get; private set; }
         
         public UpdateAnnouncementCommand(Guid announcementId, string title, string shortDescription, string description, 
             IEnumerable<string> requirements = null, IEnumerable<string> tags = null,
-            Action<IEnumerable<string>> requirementsAction = null, Action<IEnumerable<string>> tagsAction = null)
+            Action<ISet<string>> requirementsAction = null, Action<ISet<string>> tagsAction = null)
         {
             AnnouncementId = announcementId;
             Title = title;
