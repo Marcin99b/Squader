@@ -1,6 +1,6 @@
 {
-  "name": "Squader",
-  "short_name": "Squader",
+  "name": "squader.clientapp",
+  "short_name": "squader.clientapp",
   "icons": [
     {
       "src": "/img/icons/android-chrome-192x192.png",
