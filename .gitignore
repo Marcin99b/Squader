@@ -327,3 +327,4 @@ ASALocalRun/
 
 .vscode/launch.json
 .vscode/tasks.json
+*.db

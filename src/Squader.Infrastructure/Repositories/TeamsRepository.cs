@@ -4,12 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Squader.DomainModel.Repositories;
 using Squader.DomainModel.Teams;
+using Squader.Infrastructure.DAL;
 
 namespace Squader.Infrastructure.Repositories
 {
     public class TeamsRepository : ITeamsRepository
     {
         private static readonly List<Team> teams = new List<Team>();
+        private readonly IContext context;
+
+        public TeamsRepository(IContext context)
+        {
+            this.context = context;
+        }
 
         public async Task AddAsync(Team team)
         {

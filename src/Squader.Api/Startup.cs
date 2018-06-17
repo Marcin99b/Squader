@@ -52,8 +52,6 @@ namespace Squader.Api
             });
             
             var jwtSettings = Configuration.GetSettings<JwtSettings>();
-
-           
             
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -95,10 +93,7 @@ namespace Squader.Api
             builder.RegisterModule(new ContainerModule(Configuration));
             ApplicationContainer = builder.Build();
 
-
             return new AutofacServiceProvider(ApplicationContainer);
-
-
             
         }
         

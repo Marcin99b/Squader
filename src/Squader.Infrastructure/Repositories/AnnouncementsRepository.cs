@@ -18,7 +18,6 @@ namespace Squader.Infrastructure.Repositories
             this.context = context;
         }
 
-
         private static readonly List<Announcement> announcements = new List<Announcement>
         {
             new Announcement(new User("gesgs", "gefa", "ges", "ges"), "dadsa", "gesges", "edgeas"),
