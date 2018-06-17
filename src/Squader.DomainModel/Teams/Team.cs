@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Squader.DomainModel.Users;
 
 namespace Squader.DomainModel.Teams
 {
     public class Team
     {
+        [NotMapped]
         private ISet<UserTeam> users = new HashSet<UserTeam>();
 
         public Guid Id { get; private set; }
         public string Title { get; private set; }
         public string Description { get; private set; }
 
+        [NotMapped]
         public IEnumerable<UserTeam> Users
         {
             get => users;
@@ -22,6 +25,8 @@ namespace Squader.DomainModel.Teams
         public DateTime CreatedAt { get; private set; }
         public bool Deleted { get; private set; }
 
+        private Team() { }
+
         public Team(User author, string title, string description)
         {
             SetTitle(title);
@@ -29,6 +34,8 @@ namespace Squader.DomainModel.Teams
             SetUsers(x => x.Add(new UserTeam(author, TeamRole.Owner)));
             CreatedAt = DateTime.UtcNow;
         }
+
+        
 
         public void SetTitle(string title)
         {

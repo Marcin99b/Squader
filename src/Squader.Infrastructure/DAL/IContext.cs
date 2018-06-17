@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Squader.DomainModel.Announcements;
+using Squader.DomainModel.Teams;
 using Squader.DomainModel.Users;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,8 @@ namespace Squader.Infrastructure.DAL
     {
         Task<int> SaveChangesAsync();
         int SaveChanges();
+
+        DbSet<Team> Teams { get; set; }
+        DbSet<UserTeam> UserTeams { get; set; }
     }
 }

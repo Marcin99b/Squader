@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Squader.DomainModel.Users
 {
     public class User
     {
+        [Key]
         public Guid Id { get; private set; }
         public string Username { get; private set; }
         public string Email { get; private set; }
@@ -16,6 +18,8 @@ namespace Squader.DomainModel.Users
         public DateTime CreatedAt { get; private set; }
         public bool IsDeleted { get; private set; }
         public string Role { get; private set; }
+
+        private User() { }
         
         public User(string username, string email, string forename, string surname, string city, string hashPassword,
             string salt)

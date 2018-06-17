@@ -8,6 +8,7 @@ using Squader.DomainModel.Users;
 using Squader.DomainModel.Announcements;
 using System.Threading.Tasks;
 using System.Threading;
+using Squader.DomainModel.Teams;
 
 namespace Squader.Infrastructure.DAL
 {
@@ -36,7 +37,10 @@ namespace Squader.Infrastructure.DAL
         {
             return await this.SaveChangesAsync(CancellationToken.None);
         }
-        
+
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<UserTeam> UserTeams  { get; set; }
+
 
 
     }
