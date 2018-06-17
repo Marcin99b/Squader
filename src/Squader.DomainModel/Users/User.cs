@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.SqlClient;
 
 namespace Squader.DomainModel.Users
 {
@@ -41,11 +42,14 @@ namespace Squader.DomainModel.Users
 
         public User(string username, string email, string hashPassword, string salt)
         {
+            Id = Guid.NewGuid();
             Username = username;
             Email = email;
             HashPassword = hashPassword;
             Salt = salt;
             CreatedAt = DateTime.UtcNow;
+            ChangedAt = DateTime.UtcNow;
+
             IsDeleted = false;
         }
 

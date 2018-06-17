@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Squader.DomainModel.Repositories;
 using Squader.DomainModel.Teams;
 using Squader.Infrastructure.DAL;
@@ -10,7 +11,6 @@ namespace Squader.Infrastructure.Repositories
 {
     public class TeamsRepository : ITeamsRepository
     {
-        private static readonly List<Team> teams = new List<Team>();
         private readonly IContext context;
 
         public TeamsRepository(IContext context)
@@ -20,22 +20,22 @@ namespace Squader.Infrastructure.Repositories
 
         public async Task AddAsync(Team team)
         {
-            teams.Add(team);
+            await context.Teams.AddAsync(team);
+            await context.SaveChangesAsync();
+
             await Task.CompletedTask;
         }
 
         public async Task<Team> GetAsync(Guid teamId)
         {
-            return await Task.FromResult(teams.FirstOrDefault(x => x.Id == teamId));
+            return await context.Teams.FirstOrDefaultAsync(x => x.Id == teamId);
         }
 
         public async Task UpdateAsync(Team team)
         {
-            teams.Where(x => x.Id == team.Id).Select(x =>
-            {
-                x = team;
-                return x;
-            });
+            context.Teams.Update(team);
+            await context.SaveChangesAsync();
+
             await Task.CompletedTask;
         }
     }

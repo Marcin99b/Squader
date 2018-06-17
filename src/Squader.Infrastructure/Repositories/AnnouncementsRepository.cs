@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Squader.DomainModel.Announcements;
 using Squader.DomainModel.Repositories;
 using Squader.DomainModel.Users;
@@ -18,35 +19,24 @@ namespace Squader.Infrastructure.Repositories
             this.context = context;
         }
 
-        private static readonly List<Announcement> announcements = new List<Announcement>
-        {
-            new Announcement(new User("gesgs", "gefa", "ges", "ges"), "dadsa", "gesges", "edgeas"),
-            new Announcement(new User("gesgs", "gefa", "ges", "ges"), "dadsa", "gesges", "edgeas"),
-            new Announcement(new User("gesgs", "gefa", "ges", "ges"), "dadsa", "gesges", "edgeas"),
-            new Announcement(new User("gesgs", "gefa", "ges", "ges"), "dadsa", "gesges", "edgeas"),
-            new Announcement(new User("gesgs", "gefa", "ges", "ges"), "dadsa", "gesges", "edgeas"),
-            new Announcement(new User("gesgs", "gefa", "ges", "ges"), "dadsa", "gesges", "edgeas"),
-            new Announcement(new User("gesgs", "gefa", "ges", "ges"), "dadsa", "gesges", "edgeas")
-        };
-
         public async Task AddAsync(Announcement announcement)
         {
-            announcements.Add(announcement);
+            await context.Announcements.AddAsync(announcement);
+            await context.SaveChangesAsync();
+
             await Task.CompletedTask;
         }
 
         public async Task<Announcement> GetAsync(Guid announcementid)
         {
-            return await Task.FromResult(announcements.FirstOrDefault(x => x.Id == announcementid));
+            return await context.Announcements.FirstOrDefaultAsync(x => x.Id == announcementid);
         }
 
-        public async Task UpdateAsync(Announcement user)
+        public async Task UpdateAsync(Announcement announcement)
         {
-            announcements.Where(x => x.Id == user.Id).Select(x =>
-            {
-                x = user;
-                return x;
-            });
+            context.Announcements.Update(announcement);
+            await context.SaveChangesAsync();
+
             await Task.CompletedTask;
         }
     }
