@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 using Squader.Common.Extensions;
@@ -12,41 +13,41 @@ namespace Squader.DomainModel.Announcements
         [NotMapped]
         private ISet<string> requirements
         {
-            get => RequirementsJson.ToHashSet();
-            set => RequirementsJson = value;
+            get => requirementsFromJson.ToHashSet();
+            set => requirementsFromJson = value;
         }
+
         [NotMapped]
         private ISet<string> tags
         {
-            get => TagsJson.ToHashSet();
-            set => TagsJson = value;
-
+            get => tagsFromJson.ToHashSet();
+            set => tagsFromJson = value;
         }
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; private set; }
         public Guid AuthorId { get; private set; }
         public Guid TeamId { get; private set; } //TODO add team domain model
         public string Title { get; private set; }
         public string ShortDescription { get; private set; }
         public string Description { get; private set; }
-
         public string tagsJson { get; private set; } //column name - Tags
         public string requirementsJson { get;private set; } //column name - Requirements
 
         [NotMapped]
-        private IEnumerable<string> RequirementsJson
+        private IEnumerable<string> requirementsFromJson
         {
             get { return requirementsJson == null ? null : JsonConvert.DeserializeObject<string[]>(requirementsJson); }
             set { requirementsJson = JsonConvert.SerializeObject(value); }
         }
 
         [NotMapped]
-        private IEnumerable<string> TagsJson
+        private IEnumerable<string> tagsFromJson
         {
             get { return tagsJson == null ? null : JsonConvert.DeserializeObject<string[]>(tagsJson); }
             set { tagsJson = JsonConvert.SerializeObject(value); }
         }
-
 
         [NotMapped]
         public IEnumerable<string> Requirements

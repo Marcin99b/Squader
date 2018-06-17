@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Compile Remove="Migrations\20180616061335_User.cs" />
+    <Compile Remove="Migrations\20180617151446_initial.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,10 +24,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Squader.Common\Squader.Common.csproj" />
     <ProjectReference Include="..\Squader.DomainModel\Squader.DomainModel.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

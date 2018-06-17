@@ -8,6 +8,7 @@ namespace Squader.DomainModel.Teams
     public class UserTeam
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; private set; }
         public Guid UserId { get; private set; }
         public int TeamRoleId { get; private set; }
@@ -22,6 +23,7 @@ namespace Squader.DomainModel.Teams
 
         public UserTeam(User user, TeamRole role)
         {
+            Id = Guid.NewGuid();
             UserId = user.Id;
             SetRole(role);
             CreatedAt = DateTime.UtcNow;

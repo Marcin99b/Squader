@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Squader.DomainModel.Users;
 
@@ -10,6 +11,8 @@ namespace Squader.DomainModel.Teams
         [NotMapped]
         private ISet<UserTeam> users = new HashSet<UserTeam>();
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; private set; }
         public string Title { get; private set; }
         public string Description { get; private set; }
