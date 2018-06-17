@@ -16,5 +16,7 @@ namespace Squader.Infrastructure.DAL
 
         DbSet<Team> Teams { get; set; }
         DbSet<UserTeam> UserTeams { get; set; }
+        DbSet<User> Users { get; set; }
+        DbSet<Announcement> Announcements { get; set; }
     }
 }

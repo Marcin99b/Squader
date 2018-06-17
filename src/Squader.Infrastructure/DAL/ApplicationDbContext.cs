@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
-
 using System.Linq;
 using Squader.DomainModel.Users;
 using Squader.DomainModel.Announcements;
@@ -24,9 +23,18 @@ namespace Squader.Infrastructure.DAL
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Announcement>()
+                .Property(x => x.tagsJson)
+                .HasColumnName("Tags");
+
+            builder.Entity<Announcement>()
+                .Property(x => x.requirementsJson)
+                .HasColumnName("Requirements");
+
             base.OnModelCreating(builder);
 
         }
+
         public override int SaveChanges()
         {
             return base.SaveChanges();
@@ -40,6 +48,8 @@ namespace Squader.Infrastructure.DAL
 
         public DbSet<Team> Teams { get; set; }
         public DbSet<UserTeam> UserTeams  { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Announcement> Announcements { get; set; }
 
 
 

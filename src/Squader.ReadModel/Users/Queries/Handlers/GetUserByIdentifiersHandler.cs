@@ -34,14 +34,10 @@ namespace Squader.ReadModel.Users.Queries.Handlers
                 
 
             }
-                
-            
-            
                 var userWithUsername = usersRepository.GetUserByUsernameAsync(query.UserIdentifier).Result;
 
                 if (userWithUsername == null)
                     return null;
-
                 return new GetUserByIdentifiersQueryResult(userWithUsername);
             
 
