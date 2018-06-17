@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Newtonsoft.Json;
 using Squader.Common.Extensions;
 using Squader.DomainModel.Users;
@@ -32,8 +34,10 @@ namespace Squader.DomainModel.Announcements
         public string Title { get; private set; }
         public string ShortDescription { get; private set; }
         public string Description { get; private set; }
-        public string tagsJson { get; private set; } //column name - Tags
-        public string requirementsJson { get;private set; } //column name - Requirements
+        [Column("Tags")]
+        private string tagsJson { get; set; }
+        [Column("Requirements")]
+        private string requirementsJson { get; set; } 
 
         [NotMapped]
         private IEnumerable<string> requirementsFromJson
@@ -167,5 +171,16 @@ namespace Squader.DomainModel.Announcements
         {
             IsDeleted = true;
         }
+
+
+        public class AnnouncementConfiguration : IEntityTypeConfiguration<Announcement>
+        {
+            public void Configure(EntityTypeBuilder<Announcement> builder)
+            {
+                builder.Property(x => x.tagsJson);
+                builder.Property(x => x.requirementsJson);
+            }
+        }
     }
+    
 }

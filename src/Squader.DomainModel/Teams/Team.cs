@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Squader.DomainModel.Users;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Squader.DomainModel.Teams
 {
@@ -87,5 +88,6 @@ namespace Squader.DomainModel.Teams
         {
             Deleted = true;
         }
-}
+    }
+   
 }

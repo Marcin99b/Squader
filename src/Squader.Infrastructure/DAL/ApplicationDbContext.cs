@@ -8,6 +8,8 @@ using Squader.DomainModel.Announcements;
 using System.Threading.Tasks;
 using System.Threading;
 using Squader.DomainModel.Teams;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection;
 
 namespace Squader.Infrastructure.DAL
 {
@@ -23,35 +25,28 @@ namespace Squader.Infrastructure.DAL
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Announcement>()
-                .Property(x => x.tagsJson)
-                .HasColumnName("Tags");
-
-            builder.Entity<Announcement>()
-                .Property(x => x.requirementsJson)
-                .HasColumnName("Requirements");
-
+            builder.ApplyConfiguration(new Announcement.AnnouncementConfiguration());
             base.OnModelCreating(builder);
-
         }
 
         public override int SaveChanges()
         {
             return base.SaveChanges();
         }
-        
-        
-        public  async Task<int> SaveChangesAsync()
+
+
+        public async Task<int> SaveChangesAsync()
         {
             return await this.SaveChangesAsync(CancellationToken.None);
         }
 
         public DbSet<Team> Teams { get; set; }
-        public DbSet<UserTeam> UserTeams  { get; set; }
+        public DbSet<UserTeam> UserTeams { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
 
 
 
     }
+
 }
