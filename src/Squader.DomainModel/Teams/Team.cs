@@ -36,9 +36,7 @@ namespace Squader.DomainModel.Teams
             SetDescription(description);
             SetUsers(x => x.Add(new UserTeam(author, TeamRole.Owner)));
             CreatedAt = DateTime.UtcNow;
-        }
-
-        
+        }     
 
         public void SetTitle(string title)
         {
