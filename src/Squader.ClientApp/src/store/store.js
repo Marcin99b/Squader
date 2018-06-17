@@ -22,11 +22,7 @@ const translationsPl = {
     "Hello": "Cześć"
 };
 
-const translationsDe = {
-  "Hello": "Hallo"
-};
-
 Vue.i18n.add('pl', translationsPl);
-Vue.i18n.add('de', translationsDe);
+Vue.i18n.set(window.navigator.language);
 
 export default store;
