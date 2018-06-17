@@ -17,17 +17,6 @@ namespace Squader.Infrastructure.Repositories
             this.context = context;
         }
 
-        private static readonly List<User> users = new List<User>
-        {
-            new User("ffa", "grsgesr", "gsgs", "efea", "gesgs", "degfes", "grsgsr"),
-            new User("ffa", "grsgesr", "gsgs", "efea", "gesgs", "degfes", "grsgsr"),
-            new User("ffa", "grsgesr", "gsgs", "efea", "gesgs", "degfes", "grsgsr"),
-            new User("ffa", "grsgesr", "gsgs", "efea", "gesgs", "degfes", "grsgsr"),
-            new User("ffa", "grsgesr", "gsgs", "efea", "gesgs", "degfes", "grsgsr"),
-            new User("ffa", "grsgesr", "gsgs", "efea", "gesgs", "degfes", "grsgsr"),
-            new User("ffa", "grsgesr", "gsgs", "efea", "gesgs", "degfes", "grsgsr")
-        };
-
         public async Task AddAsync(User user)
         {
             await context.Users.AddAsync(user);
