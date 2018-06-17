@@ -2,7 +2,7 @@ language: csharp
 dist: trusty
 sudo: required
 mono: none
-dotnet: 2.0.0
+dotnet: 2.0.3
 before_script:
   - chmod -R a+x scripts
 script:
