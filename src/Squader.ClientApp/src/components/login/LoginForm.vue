@@ -27,7 +27,7 @@ export default {
         .post("/dont/know/url.php", params, axiosConfig)
         .then(res => {
           // Call login mutation
-          this.$store.commit("login", res.data);
+          this.$store.commit("login", res.data); // send token
         })
         .catch(error => {
           // Don't need to throw exception above in order to catch

@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <Header/>
+    <router-link to="/login">
+      Login link na razie tutaj bo potem chyba w header bedzie ale to robi @Mateusz więc sie nie wpycham
+    </router-link>
     <router-view/>
   </div>
 </template>
