@@ -11,6 +11,7 @@
     "compile:sass": "node-sass src/css/scss/main.scss src/css/style.css -w"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
