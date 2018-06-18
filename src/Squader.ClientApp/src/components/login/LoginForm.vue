@@ -3,7 +3,7 @@
 </template>
 <script>
 import axios from "axios";
-import axiosConfig from "../config/axios.conf";
+import axiosConfig from "../../config/axios.conf";
 import { required, minLength, maxLength } from "vuelidate/lib/validators";
 
 export default {
