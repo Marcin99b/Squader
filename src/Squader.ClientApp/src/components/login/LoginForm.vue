@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+    LoginForm
+  </div>
 </template>
 <script>
 import axios from "axios";
