@@ -8,7 +8,7 @@
 import LoginForm from "./loginForm";
 
 export default {
-  comments: {
+  components: {
     LoginForm
   }
 };
