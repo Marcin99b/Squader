@@ -18,5 +18,7 @@ namespace Squader.Infrastructure.DAL
         DbSet<UserTeam> UserTeams { get; set; }
         DbSet<User> Users { get; set; }
         DbSet<Announcement> Announcements { get; set; }
+
+        void ApplyMigrationsOnStartup();
     }
 }

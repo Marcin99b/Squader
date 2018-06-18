@@ -10,6 +10,7 @@ using System.Threading;
 using Squader.DomainModel.Teams;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Squader.Infrastructure.DAL
 {
@@ -44,6 +45,13 @@ namespace Squader.Infrastructure.DAL
         public DbSet<UserTeam> UserTeams { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
+
+
+
+        public void ApplyMigrationsOnStartup()
+        {
+            this.Database.EnsureCreated();
+        }
 
 
 

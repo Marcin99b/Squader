@@ -17,7 +17,8 @@ using Squader.Common;
 using Squader.Common.Settings;
 using Squader.Common.Extensions;
 using Squader.Api.Areas.Authentication.Helpers;
-
+using Squader.Infrastructure.DAL;
+using Microsoft.EntityFrameworkCore;
 
 namespace Squader.Api
 {
@@ -97,10 +98,13 @@ namespace Squader.Api
             
         }
         
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IContext context)
         {
             loggerFactory.AddSerilog();
             ConfigureSerilog.Configure();
+            context.ApplyMigrationsOnStartup();
+            
+
 #if DEBUG
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
