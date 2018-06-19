@@ -17,6 +17,8 @@ using Squader.Common;
 using Squader.Common.Settings;
 using Squader.Common.Extensions;
 using Squader.Api.Areas.Authentication.Helpers;
+using Squader.Infrastructure.DAL;
+using Microsoft.EntityFrameworkCore;
 
 namespace Squader.Api
 {
@@ -93,22 +95,25 @@ namespace Squader.Api
             ApplicationContainer = builder.Build();
 
             return new AutofacServiceProvider(ApplicationContainer);
-
-
             
         }
         
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IContext context)
         {
             loggerFactory.AddSerilog();
             ConfigureSerilog.Configure();
+            context.ApplyMigrationsOnStartup();
+            
 
-            if (env.IsDevelopment())
-            {
+#if DEBUG
                 app.UseDeveloperExceptionPage();
-            }
-            app.UseSwagger();
-            app.UseSwaggerUI(x => x.SwaggerEndpoint("/swagger/v1/swagger.json", "Squader"));
+                app.UseSwagger();
+                app.UseSwaggerUI(x =>
+                {
+                    x.SwaggerEndpoint("swagger/v1/swagger.json", "Squader");
+                    x.RoutePrefix = "";
+                });
+#endif
             app.UseMvc();
         }
     }

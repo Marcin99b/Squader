@@ -12,9 +12,13 @@ namespace Squader.ReadModel.Users.Queries.Handlers
     public class GetUserByIdentifiersHandler : IQueryHandler<GetUserByIdentifiersQuery, GetUserByIdentifiersQueryResult>
     {
         private readonly IUsersRepository usersRepository;
+        
+
         public GetUserByIdentifiersHandler(IUsersRepository userRepository)
         {
             this.usersRepository = userRepository;
+            
+            
         }
 
         public GetUserByIdentifiersQueryResult Handle(GetUserByIdentifiersQuery query)
@@ -30,14 +34,10 @@ namespace Squader.ReadModel.Users.Queries.Handlers
                 
 
             }
-                
-            
-            
                 var userWithUsername = usersRepository.GetUserByUsernameAsync(query.UserIdentifier).Result;
 
                 if (userWithUsername == null)
                     return null;
-
                 return new GetUserByIdentifiersQueryResult(userWithUsername);
             
 

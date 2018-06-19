@@ -21,7 +21,9 @@ namespace Squader.Api.Areas.Users.Controllers
         {
             var query = new GetUserByIdQuery(id);
             var result = this.queryBus.Execute(query);
-            Debug.WriteLine(result.User.Id);
+            if (result.User == null)
+                return Json(new Exception($"There is no user with id : {id}"));
+
             return Json(new UserDto(result.User));
         }
 
