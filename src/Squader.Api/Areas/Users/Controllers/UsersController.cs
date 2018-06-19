@@ -34,5 +34,17 @@ namespace Squader.Api.Areas.Users.Controllers
             await this.commandBus.ExecuteAsync(command);
             return Ok();
         }
+
+        [HttpPost("CheckUsernameAvailability")]
+        public async Task<IActionResult> CheckUsernameAvailability([FromBody]CheckUsernameAvailabilityRequest request)
+        {
+            var query = new GetUserByIdentifiersQuery(request.Username);
+            var result = await Task.Run(() => this.queryBus.Execute(query));
+
+            if (result != null)
+                return StatusCode(409);
+
+            return StatusCode(200);          
+        }
     }
 }
