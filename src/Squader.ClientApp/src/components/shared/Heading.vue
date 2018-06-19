@@ -41,6 +41,9 @@
   }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+$red: red;
+    li{
+        color: $red;
+    }
 </style>
