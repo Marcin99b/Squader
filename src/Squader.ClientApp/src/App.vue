@@ -1,31 +1,35 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <Header/>
+    <router-link to="/login">
+      Login link na razie tutaj bo potem chyba w header bedzie ale to robi @Mateusz więc sie nie wpycham
+    </router-link>
+    <br>
+    <router-link to="/register">
+      Register link na razie tutaj bo potem chyba w header bedzie ale to robi @Mateusz więc sie nie wpycham
+    </router-link>
     <router-view/>
   </div>
 </template>
+<script>
+import Header from "./components/shared/Header";
 
+export default {
+  name: "App",
+  components: {
+    Header
+  },
+  methods: {
+    changeLang(lang) {
+      this.$store.dispatch("changeLanguage", lang);
+    }
+  }
+};
+</script>
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+:root {
+  --main-color: #3086ff;
+  --secondary-color: #014fa8;
+  --background-grey: #1e1e1e;
 }
 </style>
