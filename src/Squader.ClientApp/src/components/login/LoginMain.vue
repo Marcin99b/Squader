@@ -1,8 +1,14 @@
 <template>
   <main class="login__main">
     loginMain
+    <LoginForm></LoginForm>
   </main>
 </template>
 <script>
-export default {};
+  import LoginForm from "./LoginForm";
+  export default {
+    components: {
+      LoginForm
+    }
+  };
 </script>

@@ -3,43 +3,30 @@ import Vuex from "vuex";
 import vuexI18n from "vuex-i18n";
 import createPersistedState from "vuex-persistedstate";
 
+//Importing modules
+import AuthModule from "./modules/authorization";
+import LanguagesModule from "./modules/languages";
+
+//Importing translations
+import toPolish from "./translations/toPolish";
+
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-  state: {
-    logged: false,
-    token: ""
+  modules: {
+    AuthModule,
+    LanguagesModule
   },
-  mutations: {
-    login: (state, response) => {
-      if (response) {
-        state.logged = true;
-        state.token = response;
-        console.log("state.logged flag is: " + state.logged);
-        console.log("state.token: " + state.token);
-      }
-    },
-    logout: state => {
-      state.logged = false;
-      state.token = "";
-    }
-  },
-  actions: {
-    changeLanguage(ctx, lang) {
-      Vue.i18n.set(lang);
-    }
-  },
+  state: {},
+  mutations: {},
+  actions: {},
   plugins: [createPersistedState()]
 });
 
 Vue.use(vuexI18n.plugin, store);
 
-//Do refactor here we do not want this file large
-const translationsPl = {
-  Hello: "Cześć"
-};
+Vue.i18n.add("pl", toPolish);
 
-Vue.i18n.add("pl", translationsPl);
-Vue.i18n.set(window.navigator.language);
+Vue.i18n.set(store.state.currentLanguage || navigator.language);
 
 export default store;

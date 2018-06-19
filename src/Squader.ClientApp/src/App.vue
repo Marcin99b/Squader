@@ -1,23 +1,16 @@
 <template>
   <div id="app">
-    <Header/>
-    <router-link to="/login">
-      Login link na razie tutaj bo potem chyba w header bedzie ale to robi @Mateusz więc sie nie wpycham
-    </router-link>
-    <br>
-    <router-link to="/register">
-      Register link na razie tutaj bo potem chyba w header bedzie ale to robi @Mateusz więc sie nie wpycham
-    </router-link>
+    <Heading/>
     <router-view/>
   </div>
 </template>
 <script>
-import Header from "./components/shared/Header";
+import Heading from "./components/shared/Heading";
 
 export default {
   name: "App",
   components: {
-    Header
+    Heading
   },
   methods: {
     changeLang(lang) {
