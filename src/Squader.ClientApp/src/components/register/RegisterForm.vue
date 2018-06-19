@@ -1,47 +1,57 @@
 <template>
   <div>
-    LoginForm
+    RegisterForm
   </div>
 </template>
 <script>
 import axios from "axios";
 import axiosConfig from "../../config/axios.conf";
-import { required, minLength, maxLength } from "vuelidate/lib/validators";
+import {
+  required,
+  minLength,
+  maxLength,
+  email
+} from "vuelidate/lib/validators";
 
 export default {
   data() {
     return {
-      loginNickMail: "",
+      login: "",
+      email: "",
       password: "",
-      loginError: false,
-      loginSuccess: false
+      registerError: false,
+      registerSuccess: false
     };
   },
   methods: {
-    loginMethod() {
+    registerMethod() {
       let params = new URLSearchParams();
-      params.append("nickMail", this.loginNickMail);
+      params.append("login", this.loginNickMail);
+      params.append("email", this.loginNickMail);
       params.append("password", this.password);
 
       axios
         .post("/dont/know/url.php", params, axiosConfig)
         .then(res => {
-          this.loginSuccess = true;
-          // Call login mutation
-          this.$store.commit("login", res.data); // send token
+          console.log(res);
+          this.registerSuccess = true;
         })
         .catch(error => {
-          this.loginError = true;
           // Don't need to throw exception above in order to catch
+          this.registerError = true;
           console.log(error);
         });
     }
   },
   validations: {
-    loginNickMail: {
+    login: {
       required,
       minLength: minLength(6),
       maxLength: maxLength(100)
+    },
+    email: {
+      required,
+      email
     },
     password: {
       required,
