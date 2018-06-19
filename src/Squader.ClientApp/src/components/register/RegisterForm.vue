@@ -10,7 +10,9 @@ import {
   required,
   minLength,
   maxLength,
-  email
+  email,
+  sameAs,
+  withParams
 } from "vuelidate/lib/validators";
 
 export default {
@@ -19,6 +21,7 @@ export default {
       login: "",
       email: "",
       password: "",
+      passwordConfirmation: "",
       registerError: false,
       registerSuccess: false
     };
@@ -41,6 +44,25 @@ export default {
           this.registerError = true;
           console.log(error);
         });
+    },
+    checkUnique(val, credential) {
+      if (val === "") {
+        return true;
+      } else {
+        let params = new URLSearchParams();
+        params.append(credential, credential);
+        console.log(credential);
+        return axios
+          .post("url/realtime/check/unique", params, axiosConfig)
+          .then(res => {
+            console.log(res);
+            return true;
+          })
+          .catch(res => {
+            console.log(res);
+            return false;
+          });
+      }
     }
   },
   validations: {
@@ -57,6 +79,11 @@ export default {
       required,
       minLength: minLength(8),
       maxLength: maxLength(100)
+    },
+    passwordConfirmation: {
+      required,
+      minLength: minLength(6),
+      sameAs: sameAs("password")
     }
   }
 };
