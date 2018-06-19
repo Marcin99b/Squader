@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="q">
     LoginForm
   </div>
 </template>
@@ -51,3 +51,6 @@ export default {
   }
 };
 </script>
+<style scoped lang="scss">
+
+</style>
