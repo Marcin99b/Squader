@@ -3,33 +3,33 @@
         <ul>
             <router-link
             tag="li"
-            to="">
+            to="/">
                 SQUADER
             </router-link>
             <router-link
             tag="li"
-            to="">
-                Ogłoszenia
+            to="/">
+                {{ 'Announcements' | translate}}
             </router-link>
             <router-link
             tag="li"
-            to="">
-                Stwórz Squad
+            to="/">
+                {{ 'Make Squad' | translate }}
             </router-link>
             <router-link
             tag="li"
-            to="">
-                Wydarzenia
+            to="/">
+                {{ 'Events' | translate }}
             </router-link>
             <router-link
             tag="li"
-            to="">
-                Zaloguj się
+            to="/login">
+                {{ "Sign in" | translate }}
             </router-link>
             <router-link
                     tag="li"
-                    to="">
-                Zarejestruj się
+                    to="/register">
+                {{ "Sign up" | translate }}
             </router-link>
         </ul>    
     </nav>
