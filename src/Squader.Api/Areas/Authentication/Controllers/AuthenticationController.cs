@@ -51,6 +51,12 @@ namespace Squader.Api.Areas.Authentication.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync([FromBody]RegistrationRequest user)
         {
+            if (user.Username.IsEmail())
+                return Json(new Exception("Username cannot be of email format"));
+
+            if (!user.Email.IsEmail())
+                return Json(new Exception("Email must be of email format"));
+
             var usernameQuery = new GetUserByIdentifiersQuery(user.Username);
             if (queryBus.Execute(usernameQuery) != null)
                 return Json(new Exception($"Username : {user.Username} already exists"));
