@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <Heading/>
+    <app-heading/>
     <router-view/>
   </div>
 </template>
 <script>
-import Heading from "./components/shared/Heading";
+import AppHeading from "./components/shared/AppHeading";
 
 export default {
   name: "App",
   components: {
-    Heading
+    "app-heading": AppHeading
   },
   methods: {
     changeLang(lang) {
