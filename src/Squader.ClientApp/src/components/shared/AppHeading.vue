@@ -36,14 +36,10 @@
 </template>
 
 <script>
-  export default {
-    name: "Header"
-  }
+export default {
+  name: "Header",
+};
 </script>
 
 <style scoped lang="scss">
-$red: red;
-    li{
-        color: $red;
-    }
 </style>
