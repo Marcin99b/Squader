@@ -18,7 +18,7 @@ namespace Squader.DomainModel.Teams.Commands.Handlers
 
         public async Task HandleAsync(DeleteTeamCommand command)
         {
-            var team = await teamsRepository.GetAsync(command.TeamId);
+            var team = teamsRepository.Get(command.TeamId);
             team.Delete();
             await teamsRepository.UpdateAsync(team);
         }
