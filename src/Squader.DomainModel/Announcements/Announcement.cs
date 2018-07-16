@@ -30,7 +30,7 @@ namespace Squader.DomainModel.Announcements
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; private set; }
         public Guid AuthorId { get; private set; }
-        public Guid TeamId { get; private set; } //TODO add team domain model
+        public Guid TeamId { get; private set; }
         public string Title { get; private set; }
         public string ShortDescription { get; private set; }
         public string Description { get; private set; }
@@ -81,10 +81,11 @@ namespace Squader.DomainModel.Announcements
             CreatedAt = DateTime.UtcNow;
         }
 
-        public Announcement(Guid authorId, string title, string shortDescription, string description, IEnumerable<string> requirements, IEnumerable<string> tags)
+        public Announcement(Guid authorId, Guid teamId, string title, string shortDescription, string description, IEnumerable<string> requirements, IEnumerable<string> tags)
         {
             Id = Guid.NewGuid();
             AuthorId = authorId;
+            TeamId = teamId;
             SetTitle(title);
             SetShortDescription(shortDescription);
             SetDescription(description);
