@@ -7,7 +7,7 @@ namespace Squader.DomainModel.Repositories
     public interface IAnnouncementsRepository : IRepository
     {
         Task AddAsync(Announcement announcement);
-        Task<Announcement> GetAsync(Guid announcementId);
+        Announcement Get(Guid announcementId);
         Task UpdateAsync(Announcement announcement);
     }
 }

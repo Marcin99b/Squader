@@ -15,7 +15,7 @@ namespace Squader.DomainModel.Announcements.Commands.Handlers
 
         public async Task HandleAsync(DeleteAnnouncementCommand command)
         {
-            var announcement = await announcementsRepository.GetAsync(command.AnnouncementId);
+            var announcement = announcementsRepository.Get(command.AnnouncementId);
             announcement.Delete();
             await announcementsRepository.UpdateAsync(announcement);
         }
