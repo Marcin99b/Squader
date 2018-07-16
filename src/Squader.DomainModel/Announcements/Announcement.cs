@@ -81,10 +81,10 @@ namespace Squader.DomainModel.Announcements
             CreatedAt = DateTime.UtcNow;
         }
 
-        public Announcement(User author, string title, string shortDescription, string description, IEnumerable<string> requirements, IEnumerable<string> tags)
+        public Announcement(Guid authorId, string title, string shortDescription, string description, IEnumerable<string> requirements, IEnumerable<string> tags)
         {
             Id = Guid.NewGuid();
-            AuthorId = author.Id;
+            AuthorId = authorId;
             SetTitle(title);
             SetShortDescription(shortDescription);
             SetDescription(description);
