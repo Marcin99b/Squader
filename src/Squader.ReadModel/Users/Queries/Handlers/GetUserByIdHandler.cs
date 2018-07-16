@@ -18,7 +18,7 @@ namespace Squader.ReadModel.Users.Queries.Handlers
 
         public GetUserByIdQueryResult Handle(GetUserByIdQuery query)
         {
-            var user = usersRepository.GetAsync(query.UserId).Result;
+            var user = usersRepository.Get(query.UserId);
 
             return new GetUserByIdQueryResult(user);
         }
