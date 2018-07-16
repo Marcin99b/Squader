@@ -8,6 +8,7 @@ using Squader.Cqrs;
 using Squader.DomainModel.Announcements;
 using Squader.DomainModel.Announcements.Commands;
 using Squader.ReadModel.Announcements.Queries;
+using Squader.ReadModel.Teams.Queries;
 
 namespace Squader.Api.Areas.Announcements.Controllers
 {
@@ -31,7 +32,14 @@ namespace Squader.Api.Areas.Announcements.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateNewAnnouncementAsync([FromBody] CreateNewAnnouncementRequest request)
         {
-            var command = new CreateNewAnnouncementCommand(AuthorizedUser.Id, request.Title, request.ShortDescription,
+            var team = queryBus.Execute(new GetTeamByIdQuery(request.TeamId)).Team;
+            if (team == null)
+            {
+                //should throw exception, but adding announcement without teamId is possible -> every logged in user should can add announcements etc
+                //TODO -> add announcement without team (then team will be possible to set in update) OR return exception, with information about bad team id
+            }
+
+            var command = new CreateNewAnnouncementCommand(AuthorizedUser.Id, request.TeamId, request.Title, request.ShortDescription,
                 request.Description, request.Requirements, request.Tags);
             await commandBus.ExecuteAsync(command);
             return Ok();
