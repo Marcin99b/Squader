@@ -6,7 +6,5 @@ namespace Squader.Api.Areas.Announcements.Dtos
 
     public class CreateNewAnnouncementRequest : BaseAnnouncementRequest
     {
-        public Guid AuthorId { get; set; }
-        
     }
 }
