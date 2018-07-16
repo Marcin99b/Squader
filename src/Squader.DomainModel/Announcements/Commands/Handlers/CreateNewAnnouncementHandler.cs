@@ -15,7 +15,7 @@ namespace Squader.DomainModel.Announcements.Commands.Handlers
 
         public async Task HandleAsync(CreateNewAnnouncementCommand command)
         {
-            var announcement = new Announcement(command.Author, command.Title, command.ShortDescription, command.Description, 
+            var announcement = new Announcement(command.AuthorId, command.TeamId, command.Title, command.ShortDescription, command.Description, 
                 command.Requirements, command.Tags);
             await announcementsRepository.AddAsync(announcement);
         }

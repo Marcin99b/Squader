@@ -7,7 +7,7 @@ namespace Squader.DomainModel.Repositories
     public interface IUsersRepository : IRepository
     {
         Task AddAsync(User user);
-        Task<User> GetAsync(Guid userId);
+        User Get(Guid userId);
         Task UpdateAsync(User user);
         Task<User> GetUserByUsernameAsync(string username);
         Task<User> GetUserByEmailAsync(string email);

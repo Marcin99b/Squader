@@ -15,7 +15,7 @@ namespace Squader.DomainModel.Teams.Commands.Handlers
 
         public async Task HandleAsync(UpdateTeamCommand command)
         {
-            var team = await teamsRepository.GetAsync(command.TeamId);
+            var team = teamsRepository.Get(command.TeamId);
             team.SetTitle(command.Title);
             team.SetDescription(command.Description);
             team.SetUsers(command.Users);
