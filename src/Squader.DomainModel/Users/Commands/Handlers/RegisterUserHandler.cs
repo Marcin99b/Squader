@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Squader.DomainModel.Users.Commands.Handlers
 {
-    class RegisterUserHandler : ICommandHandler<RegisterUserCommand>
+    public class RegisterUserHandler : ICommandHandler<RegisterUserCommand>
     { 
         private readonly IUsersRepository usersRepository;
 
