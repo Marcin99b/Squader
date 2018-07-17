@@ -18,37 +18,32 @@ namespace Squader.Tests.UnitTests.DomainModel.Users
     public class UsersManagementTests
     {
         [Test]
-        public async Task ShouldCreateUserAccountCorrectly()
+        public async Task ShouldRegisterUserCorrectly()
         {
             //Arrange
-            var responseUser = new User(string.Empty, string.Empty, string.Empty, string.Empty);
+            User createdUser = null;
             var usersRepository = new Mock<IUsersRepository>();
-            usersRepository.Setup(x => x.AddAsync(It.IsAny<User>()))
-                .Callback<User>(x => responseUser = x)
-                .Returns(Task.CompletedTask);
-            
-    
-            
-           // var responseUser = configureRepository(ref usersRepository);
 
-            var createNewUserHandler = new CreateNewUserHandler(usersRepository.Object);
-            var command = new CreateNewUserCommand("test", "test", "test", "test", "test", "test", "test");
+            usersRepository.Setup(x => x.AddAsync(It.IsAny<User>()))
+                .Callback<User>(x => createdUser = x)
+                .Returns(Task.CompletedTask);
+
+            var registerUserHandler = new RegisterUserHandler(usersRepository.Object);
+            var registerUserCommand = new RegisterUserCommand("test", "Test@test.pl", "test", "test");
 
             //Act
-            await createNewUserHandler.HandleAsync(command);
+            await registerUserHandler.HandleAsync(registerUserCommand);
 
             //Assert
-            usersRepository.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Once);
-            Assert.That(responseUser.Username, Is.EqualTo(command.Username));
+            Assert.That(createdUser.Username, Is.EqualTo(registerUserCommand.Username));
         }
 
         [Test]
         public async Task ShouldDeleteUserAccountCorrectly()
         {
             //Arrange
-            
-            var user = new User("test", "test", "test", "test", "test", "test", "test");
-            var userId = user.Id;
+
+            User user = new User("test", "test", "test", "test");
             var dateDeleted = new DateTime();
             var usersRepository = new Mock<IUsersRepository>();
             usersRepository.Setup(x => x.GetAsync(It.IsAny<Guid>()))
@@ -64,10 +59,9 @@ namespace Squader.Tests.UnitTests.DomainModel.Users
 
 
             var deleteUserHandler = new DeleteUserHandler(usersRepository.Object);
-            var command = new DeleteUserCommand(userId);
+            var command = new DeleteUserCommand(user.Id);
             
-             //Act
-
+            //Act
             await deleteUserHandler.HandleAsync(command);
 
             //Assert
@@ -79,29 +73,11 @@ namespace Squader.Tests.UnitTests.DomainModel.Users
             
         } 
 
-        [Test]
-        public async Task ShouldRegisterUserCorrectly()
-        {
-            //Arrange
-            var usersRepository = new Mock<IUsersRepository>();
+        
 
-            usersRepository.Setup(x => x.AddAsync(It.IsAny<User>()))
-                .Returns(Task.CompletedTask);
-
-            var registerUserHandler = new RegisterUserHandler(usersRepository.Object);
-            var registerUserCommand = new RegisterUserCommand("test", "Test@test.pl", "test", "test");
-
-            //Act
-            await registerUserHandler.HandleAsync(registerUserCommand);
-
-            //Assert
-            var responseUser = GetLastInputUser(usersRepository);
-            Assert.That(responseUser.Username, Is.EqualTo(registerUserCommand.Username));
-        }
-
-        private User GetLastInputUser(Mock<IUsersRepository> usersRepository)
-            => (User) usersRepository.Invocations.Select(inv => inv.Arguments)
-                .Select(obj =>obj.FirstOrDefault(x => x.GetType() == typeof(User))).First();
+        //private User GetLastInputUser(Mock<IUsersRepository> usersRepository)
+        //    => (User) usersRepository.Invocations.Select(inv => inv.Arguments)
+        //        .Select(obj =>obj.FirstOrDefault(x => x.GetType() == typeof(User))).First();
 
         //private Mock<IUsersRepository> configureRepository(Mock<IUsersRepository> usersRepository)
         //{
