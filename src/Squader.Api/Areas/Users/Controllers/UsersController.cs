@@ -27,14 +27,6 @@ namespace Squader.Api.Areas.Users.Controllers
             return Json(new UserDto(result.User));
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateNewUser([FromBody]CreateUserRequest request)
-        {
-            var command = new CreateNewUserCommand(request.Username, request.Email, request.Forename, request.Surname, request.City, "", "");
-            await this.commandBus.ExecuteAsync(command);
-            return Ok();
-        }
-
         [HttpPost("CheckUsernameAvailability")]
         public async Task<IActionResult> CheckUsernameAvailability([FromBody]CheckUsernameAvailabilityRequest request)
         {
