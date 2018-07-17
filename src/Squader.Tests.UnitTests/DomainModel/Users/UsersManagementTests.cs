@@ -23,6 +23,10 @@ namespace Squader.Tests.UnitTests.DomainModel.Users
             usersRepository.Setup(x => x.AddAsync(It.IsAny<User>()))
                 .Callback<User>(x => responseUser = x)
                 .Returns(Task.CompletedTask);
+            
+    
+            
+           // var responseUser = configureRepository(ref usersRepository);
 
             var createNewUserHandler = new CreateNewUserHandler(usersRepository.Object);
             var command = new CreateNewUserCommand("test", "test", "test", "test", "test", "test", "test");
@@ -70,11 +74,6 @@ namespace Squader.Tests.UnitTests.DomainModel.Users
             Assert.That(user.IsDeleted);
             Assert.That(user.ChangedAt, Is.EqualTo(dateDeleted));
             
-
-
-
-
-
         } 
 
         [Test]
@@ -86,7 +85,7 @@ namespace Squader.Tests.UnitTests.DomainModel.Users
             usersRepository.Setup(x => x.AddAsync(It.IsAny<User>()))
                 .Callback<User>(x => responseUser = x)
                 .Returns(Task.CompletedTask);
-
+             
 
             var registerUserHandler = new RegisterUserHandler(usersRepository.Object);
             var registerUserCommand = new RegisterUserCommand("test", "Test@test.pl", "test", "test");
@@ -98,5 +97,23 @@ namespace Squader.Tests.UnitTests.DomainModel.Users
             usersRepository.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Once);
             Assert.That(responseUser.Username, Is.EqualTo(registerUserCommand.Username));
         }
+
+      /*  private User configureRepository(ref Mock<IUsersRepository> usersRepository)
+        {
+            var repository = new Mock<IUsersRepository>();
+
+            var user = new User(string.Empty, string.Empty, string.Empty, string.Empty);
+
+            repository.Setup(x => x.AddAsync(It.IsAny<User>()))
+                .Callback<User>(x => user = x)
+                .Returns(Task.CompletedTask);
+
+            repository.Setup(x => x.GetAsync(It.IsAny<Guid>()))
+                .Returns(Task.FromResult(user));
+
+
+            usersRepository = repository;
+            return user;
+        }*/
     }
 }
