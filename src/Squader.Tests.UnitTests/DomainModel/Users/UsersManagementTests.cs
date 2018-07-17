@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 using Squader.Common.Extensions;
 using Squader.Cqrs;
 using Squader.DomainModel.Repositories;
@@ -80,40 +83,36 @@ namespace Squader.Tests.UnitTests.DomainModel.Users
         public async Task ShouldRegisterUserCorrectly()
         {
             //Arrange
-            var responseUser = new User(string.Empty, string.Empty, string.Empty, string.Empty);
             var usersRepository = new Mock<IUsersRepository>();
+
             usersRepository.Setup(x => x.AddAsync(It.IsAny<User>()))
-                .Callback<User>(x => responseUser = x)
                 .Returns(Task.CompletedTask);
-             
 
             var registerUserHandler = new RegisterUserHandler(usersRepository.Object);
             var registerUserCommand = new RegisterUserCommand("test", "Test@test.pl", "test", "test");
 
             //Act
-
             await registerUserHandler.HandleAsync(registerUserCommand);
 
-            usersRepository.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Once);
+            //Assert
+            var responseUser = GetLastInputUser(usersRepository);
             Assert.That(responseUser.Username, Is.EqualTo(registerUserCommand.Username));
         }
 
-      /*  private User configureRepository(ref Mock<IUsersRepository> usersRepository)
-        {
-            var repository = new Mock<IUsersRepository>();
+        private User GetLastInputUser(Mock<IUsersRepository> usersRepository)
+            => (User) usersRepository.Invocations.Select(inv => inv.Arguments)
+                .Select(obj =>obj.FirstOrDefault(x => x.GetType() == typeof(User))).First();
 
-            var user = new User(string.Empty, string.Empty, string.Empty, string.Empty);
+        //private Mock<IUsersRepository> configureRepository(Mock<IUsersRepository> usersRepository)
+        //{
+        //    usersRepository.Setup(x => x.AddAsync(It.IsAny<User>()))
+        //        .Callback<User>(x => user = x)
+        //        .Returns(Task.CompletedTask);
 
-            repository.Setup(x => x.AddAsync(It.IsAny<User>()))
-                .Callback<User>(x => user = x)
-                .Returns(Task.CompletedTask);
+        //    usersRepository.Setup(x => x.GetAsync(It.IsAny<Guid>()))
+        //        .Returns(Task.FromResult(user));
 
-            repository.Setup(x => x.GetAsync(It.IsAny<Guid>()))
-                .Returns(Task.FromResult(user));
-
-
-            usersRepository = repository;
-            return user;
-        }*/
+        //    return usersRepository;
+        //}
     }
 }
