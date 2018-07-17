@@ -45,8 +45,8 @@ namespace Squader.Tests.UnitTests.DomainModel.Users
             User user = new User("test", "test", "test", "test");
             var dateDeleted = new DateTime();
             var usersRepository = new Mock<IUsersRepository>();
-            usersRepository.Setup(x => x.GetAsync(It.IsAny<Guid>()))
-                .Returns(Task.FromResult(user));
+            usersRepository.Setup(x => x.Get(It.IsAny<Guid>()))
+                .Returns(user);
 
             usersRepository.Setup(x => x.UpdateAsync(It.IsAny<User>()))
                 .Callback<User>(x =>
@@ -65,7 +65,7 @@ namespace Squader.Tests.UnitTests.DomainModel.Users
 
             //Assert
 
-            usersRepository.Verify(x => x.GetAsync(It.IsAny<Guid>()), Times.Once);
+            usersRepository.Verify(x => x.Get(It.IsAny<Guid>()), Times.Once);
             usersRepository.Verify(x => x.UpdateAsync(It.IsAny<User>()), Times.Once);
             Assert.That(user.IsDeleted);
             Assert.That(user.ChangedAt, Is.EqualTo(dateDeleted));           
@@ -79,8 +79,8 @@ namespace Squader.Tests.UnitTests.DomainModel.Users
             var usersRepository = new Mock<IUsersRepository>();
             var dateUpdated = new DateTime();
 
-            usersRepository.Setup(x => x.GetAsync(It.IsAny<Guid>()))
-                .Returns(Task.FromResult(user));
+            usersRepository.Setup(x => x.Get(It.IsAny<Guid>()))
+                .Returns(user);
 
             usersRepository.Setup(x => x.UpdateAsync(It.IsAny<User>()))
                 .Callback<User>(x =>
@@ -98,7 +98,7 @@ namespace Squader.Tests.UnitTests.DomainModel.Users
 
 
             //Assert
-            usersRepository.Verify(x => x.GetAsync(It.IsAny<Guid>()), Times.Once);
+            usersRepository.Verify(x => x.Get(It.IsAny<Guid>()), Times.Once);
             usersRepository.Verify(x => x.UpdateAsync(It.IsAny<User>()), Times.Once);
             Assert.That(user.ChangedAt, Is.EqualTo(dateUpdated));
             Assert.That(user.Username, Is.EqualTo(command.Username));
