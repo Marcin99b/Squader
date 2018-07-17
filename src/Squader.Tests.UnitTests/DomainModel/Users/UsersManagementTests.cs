@@ -18,31 +18,6 @@ namespace Squader.Tests.UnitTests.DomainModel.Users
     public class UsersManagementTests
     {
         [Test]
-        public async Task ShouldCreateUserAccountCorrectly()
-        {
-            //Arrange
-            var responseUser = new User(string.Empty, string.Empty, string.Empty, string.Empty);
-            var usersRepository = new Mock<IUsersRepository>();
-            usersRepository.Setup(x => x.AddAsync(It.IsAny<User>()))
-                .Callback<User>(x => responseUser = x)
-                .Returns(Task.CompletedTask);
-            
-    
-            
-           // var responseUser = configureRepository(ref usersRepository);
-
-            var createNewUserHandler = new CreateNewUserHandler(usersRepository.Object);
-            var command = new CreateNewUserCommand("test", "test", "test", "test", "test", "test", "test");
-
-            //Act
-            await createNewUserHandler.HandleAsync(command);
-
-            //Assert
-            usersRepository.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Once);
-            Assert.That(responseUser.Username, Is.EqualTo(command.Username));
-        }
-
-        [Test]
         public async Task ShouldDeleteUserAccountCorrectly()
         {
             //Arrange
@@ -103,16 +78,5 @@ namespace Squader.Tests.UnitTests.DomainModel.Users
             => (User) usersRepository.Invocations.Select(inv => inv.Arguments)
                 .Select(obj =>obj.FirstOrDefault(x => x.GetType() == typeof(User))).First();
 
-        //private Mock<IUsersRepository> configureRepository(Mock<IUsersRepository> usersRepository)
-        //{
-        //    usersRepository.Setup(x => x.AddAsync(It.IsAny<User>()))
-        //        .Callback<User>(x => user = x)
-        //        .Returns(Task.CompletedTask);
-
-        //    usersRepository.Setup(x => x.GetAsync(It.IsAny<Guid>()))
-        //        .Returns(Task.FromResult(user));
-
-        //    return usersRepository;
-        //}
     }
 }
