@@ -11,23 +11,21 @@ namespace Squader.Tests.UnitTests.Common.StringExtensions
     public class StringExtensionsTests
     {
         [Test]
-        public void ShouldCheckEmailsProperly()
+        [TestCase("test@test.pl", true)]
+        [TestCase("test.test@test.com", true)]
+        [TestCase("e@eee", false)]
+        [TestCase("2e@@as.pl", false)]
+        public void ShouldCheckEmailsProperly(string email, bool shouldAssert)
         {
-            //Arrange
-            var correctEmail = "test@test.pl";
-            var correctEmail2 = "test.test@test.com";
-            var inCorrectEmail = "e@eee";
-            var inCorrectEmail2 = "2e@@as.pl";
-
-            //Act
-
             //Assert
-            Assert.That(correctEmail.IsEmail());
-            Assert.That(correctEmail2.IsEmail());
-            Assert.False(inCorrectEmail2.IsEmail());
-            Assert.False(inCorrectEmail.IsEmail());
-
-
+            if (shouldAssert)
+            {
+                Assert.IsTrue(email.IsEmail());
+            }
+            else
+            {
+                Assert.IsFalse(email.IsEmail());
+            }
         }
     }
 }
