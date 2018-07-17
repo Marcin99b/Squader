@@ -15,7 +15,7 @@ namespace Squader.DomainModel.Users.Commands.Handlers
 
         public async Task HandleAsync(DeleteUserCommand command)
         {
-            var user = await usersRepository.GetAsync(command.UserId);
+            var user = usersRepository.Get(command.UserId);
             user.Delete();
             await usersRepository.UpdateAsync(user);
         }

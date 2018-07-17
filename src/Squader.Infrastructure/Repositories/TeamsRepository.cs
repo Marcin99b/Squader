@@ -26,9 +26,9 @@ namespace Squader.Infrastructure.Repositories
             await Task.CompletedTask;
         }
 
-        public async Task<Team> GetAsync(Guid teamId)
+        public Team Get(Guid teamId)
         {
-            return await context.Teams.FirstOrDefaultAsync(x => x.Id == teamId);
+            return context.Teams.FirstOrDefault(x => x.Id == teamId && !x.Deleted);
         }
 
         public async Task UpdateAsync(Team team)
