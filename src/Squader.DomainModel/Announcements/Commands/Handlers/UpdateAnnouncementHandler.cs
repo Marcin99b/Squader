@@ -16,8 +16,8 @@ namespace Squader.DomainModel.Announcements.Commands.Handlers
 
         public async Task HandleAsync(UpdateAnnouncementCommand command)
         {
-            var user = announcementsRepository.Get(command.AnnouncementId);
-            var updated = UpdateAnnouncement(user, command);
+            var announcement = announcementsRepository.Get(command.AnnouncementId);
+            var updated = UpdateAnnouncement(announcement, command);
             await announcementsRepository.UpdateAsync(updated);
         }
 
