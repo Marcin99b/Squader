@@ -12,9 +12,9 @@ namespace Squader.Api.Areas.Authentication.Helpers
         private static readonly int SaltSize = 40;
         private readonly JwtSettings _jwtSettings;
 
-        public Encrypter(IConfiguration configuration)
+        public Encrypter(JwtSettings jwtSettings)
         {
-            _jwtSettings = configuration.GetSettings<JwtSettings>();
+            _jwtSettings = jwtSettings;
         }
 
         public string GetSalt(string value)

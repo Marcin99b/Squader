@@ -13,23 +13,27 @@ using System.IO;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
+using Squader.Common.Extensions;
+using Squader.Common.Settings;
 
 namespace Squader.Infrastructure.DAL
 {
     public class ApplicationDbContext : DbContext, IContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-        public ApplicationDbContext() { }
+        private readonly SqlSettings sqlSettings;
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, SqlSettings sqlSettings) : base(options)
+        {
+            this.sqlSettings = sqlSettings;
+        }
+        public ApplicationDbContext(SqlSettings sqlSettings)
+        {
+            this.sqlSettings = sqlSettings;
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
-            optionsBuilder.UseSqlite(connectionString);
+            optionsBuilder.UseSqlite(sqlSettings.ConnectionString);
         } 
 
         protected override void OnModelCreating(ModelBuilder builder)

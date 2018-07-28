@@ -19,6 +19,7 @@ namespace Squader.IoC
             builder.RegisterModule<QueryModule>();
             builder.RegisterModule<RepositoryModule>();
             builder.RegisterModule<DbContextModule>();
+            builder.RegisterModule(new SettingsModule(_configuration));
         }
     }
 }
