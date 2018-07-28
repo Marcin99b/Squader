@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Squader.DomainModel.Announcements;
+using Squader.DomainModel.Conversations;
 using Squader.DomainModel.Teams;
 using Squader.DomainModel.Users;
 using System;
@@ -18,6 +19,7 @@ namespace Squader.Infrastructure.DAL
         DbSet<UserTeam> UserTeams { get; set; }
         DbSet<User> Users { get; set; }
         DbSet<Announcement> Announcements { get; set; }
+        DbSet<Conversation> Conversations { get; set; }
 
         void ApplyMigrationsOnStartup();
     }
