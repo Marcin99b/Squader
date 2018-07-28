@@ -5,7 +5,7 @@ namespace Squader.DomainModel.Conversations
     public class ConversationUser
     {
         public Guid UserId { get; private set; }
-        public ConversationRole Role { get; privates et; }
+        public ConversationRole Role { get; private set; }
 
         public ConversationUser(Guid userId, ConversationRole role)
         {
