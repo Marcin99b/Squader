@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 using System.Threading;
 using Squader.DomainModel.Teams;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.IO;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.Configuration;
 
 namespace Squader.Infrastructure.DAL
 {
@@ -21,8 +23,14 @@ namespace Squader.Infrastructure.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=squader.db");
-        }
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            optionsBuilder.UseSqlite(connectionString);
+        } 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
