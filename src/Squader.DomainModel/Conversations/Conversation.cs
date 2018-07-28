@@ -22,7 +22,7 @@ namespace Squader.DomainModel.Conversations
         }
         public DateTime ChangedAt { get; private set; }
         public DateTime CreatedAt { get; private set; }
-        public bool Deleted { get; private set; }
+        public bool IsDeleted { get; private set; }
 
         public Conversation(IEnumerable<ConversationUser> users)
         {
