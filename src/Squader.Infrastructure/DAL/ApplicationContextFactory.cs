@@ -6,13 +6,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
+using Squader.Common.Extensions;
 using Squader.Common.Settings;
 
 namespace Squader.Infrastructure.DAL
 {
     public class ApplicationContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
-        /*
+        
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
@@ -20,26 +21,11 @@ namespace Squader.Infrastructure.DAL
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var sqlSettings = configuration.GetSettings<SqlSettings>();
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>(); 
                 
-            optionsBuilder.UseSqlite(connectionString);
+            optionsBuilder.UseSqlite(sqlSettings.ConnectionString);
 
-            return new ApplicationDbContext(optionsBuilder.Options);
-        }*/
-
-        private readonly SqlSettings sqlSettings;
-
-        public ApplicationContextFactory(SqlSettings sqlSettings)
-        {
-            this.sqlSettings = sqlSettings;
-        }
-
-        public ApplicationDbContext CreateDbContext(string[] args)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-
-            optionsBuilder.UseSqlite(this.sqlSettings.ConnectionString);
             return new ApplicationDbContext(optionsBuilder.Options, sqlSettings);
         }
     }
