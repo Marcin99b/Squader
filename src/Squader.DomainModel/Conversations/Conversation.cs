@@ -45,7 +45,7 @@ namespace Squader.DomainModel.Conversations
 
         public void Delete()
         {
-            Deleted = true;
+            IsDeleted = true;
         }
     }
 }
