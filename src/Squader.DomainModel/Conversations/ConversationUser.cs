@@ -12,13 +12,15 @@ namespace Squader.DomainModel.Conversations
         public int ConversationRoleId { get; private set; }
         [NotMapped]
         public ConversationRole Role { get; private set; }
+        public Guid ConversationId { get; private set; }
 
         private ConversationUser() { }
 
-        public ConversationUser(Guid userId, ConversationRole role)
+        public ConversationUser(Guid userId, ConversationRole role, Guid conversationId)
         {
             UserId = userId;
             Role = role;
+            ConversationId = conversationId;
         }
     }
 }

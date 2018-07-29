@@ -47,6 +47,8 @@ namespace Squader.Infrastructure.DAL
         public DbSet<User> Users { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<Conversation> Conversations { get; set; }
+        public DbSet<ConversationMessage> ConversationMessages { get; set; }
+        public DbSet<ConversationUser> ConversationUsers { get; set; }
 
         public void ApplyMigrationsOnStartup()
         {
