@@ -27,6 +27,15 @@ namespace Squader.Infrastructure.DAL
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new Announcement.AnnouncementConfiguration());
+            builder.ApplyConfiguration(new Team.TeamConfiguration());
+
+            builder.Entity<User>()
+                .HasMany(x => x.UserTeams)
+                .WithOne(x => x.User)
+                .HasForeignKey(x => x.UserId);
+
+            
+
             base.OnModelCreating(builder);
         }
 

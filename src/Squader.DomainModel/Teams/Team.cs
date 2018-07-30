@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 using Squader.DomainModel.Users;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -9,8 +10,8 @@ namespace Squader.DomainModel.Teams
 {
     public class Team
     {
-        [NotMapped]
-        private ISet<UserTeam> users = new HashSet<UserTeam>();
+        
+        protected virtual ICollection<UserTeam> users { get; set; }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -69,7 +70,7 @@ namespace Squader.DomainModel.Teams
             UpdateVersion();
         }
 
-        public void SetUsers(Action<ISet<UserTeam>> action)
+        public void SetUsers(Action<ICollection<UserTeam>> action)
         {
             if (action == null)
             {
@@ -87,6 +88,17 @@ namespace Squader.DomainModel.Teams
         public void Delete()
         {
             Deleted = true;
+        }
+
+        public class TeamConfiguration : IEntityTypeConfiguration<Team>
+        {
+            public void Configure(EntityTypeBuilder<Team> builder)
+            {
+                builder
+                    .HasMany(x => x.users)
+                    .WithOne(x => x.Team)
+                    .HasForeignKey(x => x.TeamId);
+            }
         }
     }
    

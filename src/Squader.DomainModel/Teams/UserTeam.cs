@@ -15,6 +15,10 @@ namespace Squader.DomainModel.Teams
         public DateTime ChangedAt { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public bool Deleted { get; private set; }
+        public Guid TeamId { get; private set; }
+
+        public virtual User User { get; private set; }
+        public virtual Team Team { get; private set; }
 
         [NotMapped]
         public TeamRole Role { get; private set; }

@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Squader.DomainModel.Teams;
 
 namespace Squader.DomainModel.Users
 {
@@ -20,6 +23,8 @@ namespace Squader.DomainModel.Users
         public DateTime CreatedAt { get; private set; }
         public bool IsDeleted { get; private set; }
         public string Role { get; private set; }
+
+        public virtual ICollection<UserTeam> UserTeams { get; private set; }    
 
         private User() { }
         
@@ -119,6 +124,17 @@ namespace Squader.DomainModel.Users
                 return; ;
             }
             Salt = salt;
+            UpdateVersion();
+        }
+
+        public void SetUserTeams(ICollection<UserTeam> userTeams)
+        {
+            if (userTeams == null)
+            {
+                return;
+            }
+
+            UserTeams = userTeams;
             UpdateVersion();
         }
 
