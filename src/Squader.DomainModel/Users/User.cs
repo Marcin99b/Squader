@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Squader.DomainModel.Teams;
 
 namespace Squader.DomainModel.Users
@@ -146,6 +148,17 @@ namespace Squader.DomainModel.Users
         private void UpdateVersion()
         {
             ChangedAt = DateTime.UtcNow;
+        }
+
+        public class UserConfiguration : IEntityTypeConfiguration<User>
+        {
+            public void Configure(EntityTypeBuilder<User> builder)
+            {
+                builder
+                    .HasMany(x => x.UserTeams)
+                    .WithOne(x => x.User)
+                    .HasForeignKey(x => x.UserId);
+            }
         }
     }
 }

@@ -29,11 +29,9 @@ namespace Squader.Infrastructure.DAL
         {
             builder.ApplyConfiguration(new Announcement.AnnouncementConfiguration());
             builder.ApplyConfiguration(new Team.TeamConfiguration());
+            builder.ApplyConfiguration(new User.UserConfiguration());
 
-            builder.Entity<User>()
-                .HasMany(x => x.UserTeams)
-                .WithOne(x => x.User)
-                .HasForeignKey(x => x.UserId);
+            
 
             
 

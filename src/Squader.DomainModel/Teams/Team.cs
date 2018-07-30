@@ -18,6 +18,9 @@ namespace Squader.DomainModel.Teams
         public Guid Id { get; private set; }
         public string Title { get; private set; }
         public string Description { get; private set; }
+        public DateTime ChangedAt { get; private set; }
+        public DateTime CreatedAt { get; private set; }
+        public bool Deleted { get; private set; }
 
         [NotMapped]
         public IEnumerable<UserTeam> Users
@@ -25,10 +28,6 @@ namespace Squader.DomainModel.Teams
             get => users;
             private set => users = new HashSet<UserTeam>(value);
         }
-
-        public DateTime ChangedAt { get; private set; }
-        public DateTime CreatedAt { get; private set; }
-        public bool Deleted { get; private set; }
 
         private Team() { }
 
