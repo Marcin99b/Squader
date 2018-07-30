@@ -5,11 +5,11 @@ using Squader.DomainModel.Repositories;
 
 namespace Squader.DomainModel.Announcements.Commands.Handlers
 {
-    public class UpdateAnnouncementHandler : ICommandHandler<UpdateAnnouncementCommand>
+    public class UpdateConversationHandler : ICommandHandler<UpdateAnnouncementCommand>
     {
         private readonly IAnnouncementsRepository announcementsRepository;
 
-        public UpdateAnnouncementHandler(IAnnouncementsRepository announcementsRepository)
+        public UpdateConversationHandler(IAnnouncementsRepository announcementsRepository)
         {
             this.announcementsRepository = announcementsRepository;
         }

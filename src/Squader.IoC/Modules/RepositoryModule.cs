@@ -37,9 +37,6 @@ namespace Squader.IoC.Modules
 
             }
             while (stack.Count > 0);
-
-            builder.RegisterType<AnnouncementsRepository>()
-                .As<IAnnouncementsRepository>();
         }
     }
 }

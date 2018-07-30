@@ -72,7 +72,7 @@ namespace Squader.Tests.UnitTests.DomainModel.Announcements
                 })
                 .Returns(Task.CompletedTask);
 
-            var updateAnnouncementHandler = new UpdateAnnouncementHandler(repository.Object);
+            var updateAnnouncementHandler = new UpdateConversationHandler(repository.Object);
             var command = new UpdateAnnouncementCommand(new Guid(), "test","test","test", tags: tagList);
 
             //Act
