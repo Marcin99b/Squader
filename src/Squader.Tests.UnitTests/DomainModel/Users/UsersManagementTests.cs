@@ -107,12 +107,6 @@ namespace Squader.Tests.UnitTests.DomainModel.Users
             Assert.That(user.Surname, Is.EqualTo(command.Surname));
             Assert.That(user.City, Is.EqualTo(command.City));
         }
-
-        //private User GetLastInputUser(Mock<IUsersRepository> usersRepository)
-        //    => (User) usersRepository.Invocations.Select(inv => inv.Arguments)
-        //        .Select(obj =>obj.FirstOrDefault(x => x.GetType() == typeof(User))).First();
-
- 
     }
 }
 
