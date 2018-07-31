@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Squader.DomainModel.Announcements;
 using Squader.DomainModel.Teams;
 
 namespace Squader.DomainModel.Users
@@ -27,6 +28,7 @@ namespace Squader.DomainModel.Users
         public string Role { get; private set; }
 
         public virtual ICollection<UserTeam> UserTeams { get; private set; }    
+        public virtual ICollection<Announcement> Announcements { get; private set }
 
         private User() { }
         
@@ -158,6 +160,11 @@ namespace Squader.DomainModel.Users
                     .HasMany(x => x.UserTeams)
                     .WithOne(x => x.User)
                     .HasForeignKey(x => x.UserId);
+
+                builder
+                    .HasMany(x => x.Announcements)
+                    .WithOne(x => x.Author)
+                    .HasForeignKey(x => x.AuthorId);
             }
         }
     }

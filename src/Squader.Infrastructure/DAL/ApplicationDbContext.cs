@@ -31,10 +31,6 @@ namespace Squader.Infrastructure.DAL
             builder.ApplyConfiguration(new Team.TeamConfiguration());
             builder.ApplyConfiguration(new User.UserConfiguration());
 
-            
-
-            
-
             base.OnModelCreating(builder);
         }
 
@@ -42,7 +38,6 @@ namespace Squader.Infrastructure.DAL
         {
             return base.SaveChanges();
         }
-
 
         public async Task<int> SaveChangesAsync()
         {

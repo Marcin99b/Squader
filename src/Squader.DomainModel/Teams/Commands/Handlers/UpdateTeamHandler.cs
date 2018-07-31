@@ -19,7 +19,7 @@ namespace Squader.DomainModel.Teams.Commands.Handlers
             team.SetTitle(command.Title);
             team.SetDescription(command.Description);
             team.SetUsers(command.Users);
-            team.SetUsers(command.UsersAction);
+           // team.SetUsers(command.UsersAction);
             await teamsRepository.UpdateAsync(team);
         }
     }

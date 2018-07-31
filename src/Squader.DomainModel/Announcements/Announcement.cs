@@ -37,7 +37,9 @@ namespace Squader.DomainModel.Announcements
         [Column("Tags")]
         private string tagsJson { get; set; }
         [Column("Requirements")]
-        private string requirementsJson { get; set; } 
+        private string requirementsJson { get; set; }
+
+        public virtual User Author { get; private set; }
 
         [NotMapped]
         private IEnumerable<string> requirementsFromJson
@@ -180,6 +182,7 @@ namespace Squader.DomainModel.Announcements
             {
                 builder.Property(x => x.tagsJson);
                 builder.Property(x => x.requirementsJson);
+
             }
         }
     }

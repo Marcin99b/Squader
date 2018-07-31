@@ -64,7 +64,7 @@ namespace Squader.Api
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key)),
                         SaveSigninToken = true
                     };
-                });
+                }); 
            // services.AddAuthorization(x => x.AddPolicy("admin", policy => policy.RequireRole("admin")));
 
             //change to autofac injection
