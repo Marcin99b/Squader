@@ -28,7 +28,7 @@ namespace Squader.DomainModel.Users
         public string Role { get; private set; }
 
         public virtual ICollection<UserTeam> UserTeams { get; private set; }    
-        public virtual ICollection<Announcement> Announcements { get; private set }
+        public virtual ICollection<Announcement> Announcements { get; private set; }
 
         private User() { }
         

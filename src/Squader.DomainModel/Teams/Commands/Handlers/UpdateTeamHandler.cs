@@ -18,7 +18,7 @@ namespace Squader.DomainModel.Teams.Commands.Handlers
             var team = teamsRepository.Get(command.TeamId);
             team.SetTitle(command.Title);
             team.SetDescription(command.Description);
-            team.SetUsers(command.Users);
+           // team.SetUsers(command.Users);
            // team.SetUsers(command.UsersAction);
             await teamsRepository.UpdateAsync(team);
         }

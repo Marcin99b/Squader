@@ -22,7 +22,6 @@ namespace Squader.Infrastructure.Repositories
         {
             await context.Teams.AddAsync(team);
             await context.SaveChangesAsync();
-
             await Task.CompletedTask;
         }
 

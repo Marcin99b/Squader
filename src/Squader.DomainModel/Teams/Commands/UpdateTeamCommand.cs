@@ -10,10 +10,10 @@ namespace Squader.DomainModel.Teams.Commands
         public string Title { get; private set; }
         public string Description { get; private set; }
         public IEnumerable<UserTeam> Users { get; private set; }
-        public Action<ISet<UserTeam>> UsersAction { get; private set; }
+        public Action<ICollection<UserTeam>> UsersAction { get; private set; }
 
         public UpdateTeamCommand(Guid teamId, string title, string description, 
-            IEnumerable<UserTeam> users = null, Action<ISet<UserTeam>> usersAction = null)
+            IEnumerable<UserTeam> users = null, Action<ICollection<UserTeam>> usersAction = null)
         {
             TeamId = teamId;
             Title = title;

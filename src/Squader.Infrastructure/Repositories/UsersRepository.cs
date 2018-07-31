@@ -34,7 +34,6 @@ namespace Squader.Infrastructure.Repositories
         {
             context.Users.Update(user);
             await context.SaveChangesAsync();
-
             await Task.CompletedTask;
         }
 

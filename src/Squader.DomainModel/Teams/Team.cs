@@ -33,9 +33,10 @@ namespace Squader.DomainModel.Teams
 
         public Team(User author, string title, string description)
         {
+            users = new HashSet<UserTeam>();
             SetTitle(title);
             SetDescription(description);
-            SetUsers(x => x.Add(new UserTeam(author, TeamRole.Owner)));
+            AddUserTeam(new UserTeam(author, TeamRole.Owner));
             CreatedAt = DateTime.UtcNow;
         }     
 
@@ -59,6 +60,13 @@ namespace Squader.DomainModel.Teams
             UpdateVersion();
         }
 
+        public void AddUserTeam(UserTeam user)
+        {
+            users.Add(user);
+            UpdateVersion();
+
+        }
+        /*
         public void SetUsers(IEnumerable<UserTeam> users)
         {
             if (users == null)
@@ -78,7 +86,7 @@ namespace Squader.DomainModel.Teams
             action.Invoke(users);
             UpdateVersion();
         }
-
+        */
         public void UpdateVersion()
         {
             ChangedAt = DateTime.UtcNow;
