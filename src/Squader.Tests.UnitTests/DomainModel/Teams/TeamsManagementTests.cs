@@ -41,8 +41,8 @@ namespace Squader.Tests.UnitTests.DomainModel.Teams
         public async Task ShouldDeleteTeamCorrectly()
         {
             //Arrange
-            User testUser = new User("test", "test", "test", "test");
-            Team testTeam = new Team(testUser, "test", "test");
+            var testUser = new User("test", "test", "test", "test");
+            var testTeam = new Team(testUser, "test", "test");
             var dateDeleted = new DateTime();
             var teamsRepository = new Mock<ITeamsRepository>();
             teamsRepository.Setup(x => x.Get(It.IsAny<Guid>())).Returns(testTeam);
@@ -64,8 +64,8 @@ namespace Squader.Tests.UnitTests.DomainModel.Teams
         public async Task ShouldUpdateTeamCorrectly()
         {
             //Arrange
-            User testUser = new User("test", "test", "test", "test");
-            Team testTeam = new Team(testUser, "test", "test");
+            var testUser = new User("test", "test", "test", "test");
+            var testTeam = new Team(testUser, "test", "test");
             var dateUpdated = new DateTime();
             var teamsRepository = new Mock<ITeamsRepository>();
 
