@@ -15,6 +15,7 @@ namespace Squader.DomainModel.Conversations
         public string Message { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public Guid ConversationId { get; private set; }
+        public virtual Conversation Conversation { get; private set; }
 
         private ConversationMessage() { }
 

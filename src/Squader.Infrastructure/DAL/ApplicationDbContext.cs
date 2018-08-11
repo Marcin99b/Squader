@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
 using Squader.DomainModel.Users;
 using Squader.DomainModel.Announcements;
 using System.Threading.Tasks;
 using System.Threading;
 using Squader.DomainModel.Teams;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Squader.DomainModel.Conversations;
 
 namespace Squader.Infrastructure.DAL
@@ -30,6 +23,7 @@ namespace Squader.Infrastructure.DAL
             builder.ApplyConfiguration(new Announcement.AnnouncementConfiguration());
             builder.ApplyConfiguration(new Team.TeamConfiguration());
             builder.ApplyConfiguration(new User.UserConfiguration());
+            builder.ApplyConfiguration(new Conversation.ConversationConfiguration());
 
             base.OnModelCreating(builder);
         }

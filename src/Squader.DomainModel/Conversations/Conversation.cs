@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Squader.DomainModel.Announcements;
 
 namespace Squader.DomainModel.Conversations
 {
@@ -20,15 +23,15 @@ namespace Squader.DomainModel.Conversations
         [NotMapped]
         public IEnumerable<ConversationUser> Users
         {
-            get { return users; }
-            set { users = new HashSet<ConversationUser>(value); }
+            get => users;
+            set => users = new HashSet<ConversationUser>(value);
         }
 
         [NotMapped]
         public IEnumerable<ConversationMessage> Messages
         {
-            get { return messages; }
-            set { messages = new HashSet<ConversationMessage>(value); }
+            get => messages;
+            set => messages = new HashSet<ConversationMessage>(value);
         }
         public DateTime ChangedAt { get; private set; }
         public DateTime CreatedAt { get; private set; }
@@ -58,6 +61,21 @@ namespace Squader.DomainModel.Conversations
         public void Delete()
         {
             IsDeleted = true;
+        }
+
+        public class ConversationConfiguration : IEntityTypeConfiguration<Conversation>
+        {
+            public void Configure(EntityTypeBuilder<Conversation> builder)
+            {
+                builder.HasMany(x => x.Messages)
+                    .WithOne(x => x.Conversation)
+                    .HasForeignKey(x => x.ConversationId);
+
+                builder.HasMany(x => x.Users)
+                    .WithOne(x => x.Conversation)
+                    .HasForeignKey(x => x.ConversationId);
+
+            }
         }
     }
 }

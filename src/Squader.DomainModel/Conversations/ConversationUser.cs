@@ -13,6 +13,7 @@ namespace Squader.DomainModel.Conversations
         [NotMapped]
         public ConversationRole Role { get; private set; }
         public Guid ConversationId { get; private set; }
+        public virtual Conversation Conversation { get; private set; }
 
         private ConversationUser() { }
 

@@ -26,8 +26,7 @@ namespace Squader.DomainModel.Announcements
             set => tagsFromJson = value;
         }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; private set; }
         public Guid AuthorId { get; private set; }
         public Guid TeamId { get; private set; }
